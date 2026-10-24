@@ -107,7 +107,7 @@ input[type=range]{width:100%;accent-color:var(--lime)}
  <div class="ct"><button data-act="sh" id="nsh" aria-label="Shuffle"></button><button data-act="pv" id="npv" aria-label="Previous"></button><button class="big" id="npp" data-act="tog" aria-label="Play or pause"></button><button data-act="nx" id="nnx" aria-label="Next"></button><button data-act="rp" id="nrp" aria-label="Repeat"></button></div>
 </section>
 <div id="login"><div class="lg">KLYRO</div><p>Your music, your mood. Stream your favorite songs, discover new artists, and vibe to every beat.</p>
-<button class="gb" id="gbtn"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 019.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.2A24 24 0 000 24c0 3.9.9 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.2-13.5-9.9l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/></svg>Continue with Google</button></div>
+<button class="gb" id="gbtn"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 019.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.2A24 24 0 000 24c0 3.9.9 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.2-13.5-9.9l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/></svg>Continue with Google</button><button id="skipb" style="margin-top:4px;color:var(--mu);text-decoration:underline">Just listen for now</button></div>
 <input type="file" id="addf" accept="audio/*" multiple hidden>
 <div id="toast"></div>
 <script>
@@ -127,8 +127,8 @@ const DEMO=[
  {id:'d3',title:'Static Hearts',artist:'Zed Orbit',g:2,demo:1,bio:'Glitchy bass and big feelings.',soc:{},tracks:['Low Battery','Signal Lost','Reboot']}
 ];
 DEMO.forEach((a,i)=>a.tracks=a.tracks.map((t,j)=>({id:a.id+'t'+j,title:t,seed:i*3+j+1})));
-try{albums=JSON.parse(localStorage.getItem('klyro_albums')||'[]');liked=JSON.parse(localStorage.getItem('klyro_liked')||'[]')}catch(e){}
-const save=()=>{try{localStorage.setItem('klyro_albums',JSON.stringify(albums));localStorage.setItem('klyro_liked',JSON.stringify(liked))}catch(e){toast('Storage is full. Remove an album first')}};
+try{liked=JSON.parse(localStorage.getItem('klyro_liked')||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem('klyro_liked',JSON.stringify(liked))}catch(e){}};
 const idb=new Promise(r=>{try{const q=indexedDB.open('klyro',1);q.onupgradeneeded=()=>q.result.createObjectStore('a');q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}});
 const idbPut=async(k,v)=>{const d=await idb;if(!d)throw 0;return new Promise((ok,no)=>{const t=d.transaction('a','readwrite');t.objectStore('a').put(v,k);t.oncomplete=ok;t.onerror=no})};
 const idbGet=async k=>{const d=await idb;if(!d)return null;return new Promise(ok=>{const q=d.transaction('a').objectStore('a').get(k);q.onsuccess=()=>ok(q.result);q.onerror=()=>ok(null)})};
@@ -144,7 +144,7 @@ if(s%2==0)x+=Math.sin(6.283*(55*Math.exp(-p*5))*p*2)*e*.6;else x+=(Math.random()
 b[44+i]=Math.max(0,Math.min(255,128+x*110))}
 return URL.createObjectURL(new Blob([b],{type:'audio/wav'}))}
 const urlCache={};
-async function srcOf(t){if(urlCache[t.id])return urlCache[t.id];let u;if(t.seed)u=wav(t.seed);else{const bl=await idbGet(t.id);if(!bl)return null;u=URL.createObjectURL(bl)}return urlCache[t.id]=u}
+async function srcOf(t){if(t.url)return t.url;if(urlCache[t.id])return urlCache[t.id];let u;if(t.seed)u=wav(t.seed);else{const bl=await idbGet(t.id);if(!bl)return null;u=URL.createObjectURL(bl)}return urlCache[t.id]=u}
 // ---------- player ----------
 const au=new Audio();let Q=[],qi=-1,QA=null,shuf=false,rep=false;
 const fmt=s=>isFinite(s)?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'0:00';
@@ -164,15 +164,18 @@ $('#sk').oninput=e=>{if(au.duration)au.currentTime=e.target.value/100*au.duratio
 function lk(id){if(!id)return;const i=liked.indexOf(id);i<0?liked.push(id):liked.splice(i,1);save();toast(i<0?'Added to Liked Songs':'Removed from Liked Songs');sync();if(view.v==='alb'||view.v==='lib')render()}
 // ---------- UI pieces ----------
 let view={v:'home'},flt='all',me=null,addTarget=null;
-window.onUser=u=>{me=u;$('#login').hidden=!!u;render()};
+const skipped=()=>{try{return sessionStorage.getItem('klyro_skip')==='1'}catch(e){return false}};
+window.onUser=u=>{me=u;$('#login').hidden=!!u||skipped();render()};
+window.onAlbums=l=>{albums=l;if(QA&&!QA.demo){const n=albums.find(x=>x.id===QA.id);if(n){QA=n;Q=n.tracks}}if(view.v!=='up'&&view.v!=='search')render()};
 $('#gbtn').onclick=()=>window.klyroSignIn?window.klyroSignIn():toast('Login is loading, try again');
+$('#skipb').onclick=()=>{try{sessionStorage.setItem('klyro_skip','1')}catch(e){}$('#login').hidden=true};
 const NAV=[['home','home'],['search','search'],['up','plus'],['lib','lib'],['artists','user']];
 $('#nv').innerHTML=NAV.map(([k,i])=>`<button data-act="nav|${k}" data-n="${k}" aria-label="${k==='up'?'Create album':k==='lib'?'My Music':k[0].toUpperCase()+k.slice(1)}">${ic(i)}</button>`).join('');
 $('#nx0').innerHTML=ic('down');$('#nsh').innerHTML=ic('shuffle');$('#npv').innerHTML=ic('prev');$('#nnx').innerHTML=ic('next');$('#nrp').innerHTML=ic('repeat');$('#mnx').innerHTML=ic('next');upd();
 const NAVV={home:'home',alb:'home',search:'search',lib:'lib',up:'up',artists:'artists'};
-function go(v,id){const from=view.v==='alb'?view.from:view.v;view={v,id,from:v==='alb'?from:undefined};document.querySelectorAll('#nv [data-n]').forEach(t=>{const on=t.dataset.n===NAVV[v];t.classList.toggle('on',on);on?t.setAttribute('aria-current','page'):t.removeAttribute('aria-current')});render();scrollTo(0,0)}
+function go(v,id){if(v==='up'&&!me){$('#login').hidden=false;toast('Sign in to upload your music');return}const from=view.v==='alb'?view.from:view.v;view={v,id,from:v==='alb'?from:undefined};document.querySelectorAll('#nv [data-n]').forEach(t=>{const on=t.dataset.n===NAVV[v];t.classList.toggle('on',on);on?t.setAttribute('aria-current','page'):t.removeAttribute('aria-current')});render();scrollTo(0,0)}
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('s');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('s'),2400)}
-const own=a=>!a.demo&&(!a.uid||(me&&a.uid===me.uid));
+const own=a=>!a.demo&&!!me&&a.uid===me.uid;
 const ns=a=>`${a.tracks.length} ${a.tracks.length==1?'Song':'Songs'}`;
 const row=a=>`<div class="rw" role="button" tabindex="0" data-act="open|${a.id}"><div class="th" style="${bg(a)}">${a.cover?'':ini(a.title)}</div><div class="rt"><b>${esc(a.title)}</b><small>By ${esc(a.artist)} • ${ns(a)}</small></div><button class="pb" data-act="pl|${a.id}|0" aria-label="Play ${esc(a.title)}">${ic('play')}</button></div>`;
 const fc=a=>`<div class="fc" role="button" tabindex="0" style="background:${P[a.g%6]}" data-act="open|${a.id}"><div class="ft"><small>${a.demo?'Demo album':'New drop'}</small><b>${esc(a.title)}</b><span>${esc(a.bio||'By '+a.artist)}</span><button class="pb dk" data-act="pl|${a.id}|0" aria-label="Play ${esc(a.title)}">${ic('play')}</button></div><div class="fi" style="${bg(a)}">${a.cover?'':ini(a.title)}</div></div>`;
@@ -193,7 +196,7 @@ function render(){const A=$('#app');
   const f=view.f||'all',lt=[];all().forEach(a=>a.tracks.forEach((t,i)=>{if(liked.includes(t.id))lt.push([a,t,i])}));
   A.innerHTML=`${tb('My Music',1)}<div class="chips">${[['all','All'],['mine','Yours'],['liked','Liked Songs']].map(([k,l])=>`<button class="chip ${f===k?'on':''}" data-act="lf|${k}">${l}</button>`).join('')}</div><div style="height:14px"></div>`+
   (f==='liked'?(lt.length?lt.map(([a,t,i])=>`<div class="rw" role="button" tabindex="0" data-act="pl|${a.id}|${i}"><div class="th" style="${bg(a)}">${a.cover?'':ini(a.title)}</div><div class="rt"><b>${esc(t.title)}</b><small>By ${esc(a.artist)}</small></div><button class="pb on" data-act="like|${t.id}" aria-label="Unlike">${ic('heart')}</button></div>`).join(''):`<div class="empty">Tap the heart on a song to save it here.</div>`):
-  (f==='mine'?albums:all()).map(row).join('')||`<div class="empty">You haven’t uploaded an album yet.</div>`);
+  (f==='mine'?albums.filter(own):all()).map(row).join('')||`<div class="empty">You haven’t uploaded an album yet.</div>`);
  }else if(view.v==='artists'){
   const m={};all().forEach(a=>{(m[a.artist]=m[a.artist]||[]).push(a)});
   A.innerHTML=`${tb('Artists',1)}<div class="grid">${Object.entries(m).map(([n,l])=>`<button class="card" data-act="open|${l[0].id}" style="text-align:center"><div class="cov" style="border-radius:50%;${l[0].photo?`background-image:url(${l[0].photo})`:bg(l[0])}">${l[0].photo?'':ini(n)}</div><b>${esc(n)}</b><small>${l.length} ${l.length>1?'albums':'album'}</small></button>`).join('')}</div>`;
@@ -212,23 +215,33 @@ function render(){const A=$('#app');
   <label>Album cover <em>optional</em><input type="file" id="ac" accept="image/*"></label><label>Artist photo <em>optional</em><input type="file" id="ap" accept="image/*"></label>
   <div class="box"><b>Social links <em class="note">optional</em></b><input type="url" id="s1" placeholder="Instagram URL"><input type="url" id="s2" placeholder="YouTube URL"><input type="url" id="s3" placeholder="Spotify URL"><input type="url" id="s4" placeholder="TikTok URL"></div>
   <label>Songs<input type="file" id="as" accept="audio/*" multiple required><span class="note">Pick one or more audio files. Song titles come from file names.</span></label>
-  <button class="btn" type="submit" id="sub">Publish album</button><p class="note">Albums are saved in this browser on this device. Sharing across devices needs a server.</p></form>`;
+  <button class="btn" type="submit" id="sub">Publish album</button><p class="note">Your album goes live for everyone. Only you can add songs to it or delete it.</p></form>`;
   $('#f').onsubmit=pub;
  }}
 async function img(file,max){if(!file)return'';return new Promise(ok=>{const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',.82))};i.onerror=()=>ok('');i.src=r.result};r.onerror=()=>ok('');r.readAsDataURL(file)})}
-async function pub(e){e.preventDefault();const b=$('#sub');b.disabled=true;b.textContent='Publishing…';
+async function pubOld(e){e.preventDefault();const b=$('#sub');b.disabled=true;b.textContent='Publishing…';
  try{const files=[...$('#as').files],id='u'+Date.now(),tracks=[];
   for(let i=0;i<files.length;i++){const tid=id+'t'+i;await idbPut(tid,files[i]);tracks.push({id:tid,title:files[i].name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ')})}
   const a={id,uid:me?me.uid:'',title:$('#at').value.trim(),artist:$('#an').value.trim(),bio:$('#ab').value.trim(),g:Math.floor(Math.random()*6),cover:await img($('#ac').files[0],420),photo:await img($('#ap').files[0],120),soc:{instagram:$('#s1').value.trim(),youtube:$('#s2').value.trim(),spotify:$('#s3').value.trim(),tiktok:$('#s4').value.trim()},tracks};
   albums.unshift(a);save();toast('Published');go('alb',id)
  }catch(err){toast('Upload failed. Try smaller files.');b.disabled=false;b.textContent='Publish album'}}
-function delAlb(id){if(!confirm('Delete this album?'))return;const a=albums.find(x=>x.id===id);if(!a||!own(a))return;a.tracks.forEach(x=>{idbDel(x.id);liked=liked.filter(l=>l!==x.id)});albums=albums.filter(x=>x!==a);save();if(QA&&QA.id===id){au.pause();$('#mini').hidden=true;$('#np').classList.remove('o')}go('home')}
+const CLD={cloud:'hjs27iwz',preset:'klyro_uploads'};
+function cup(file,onp){return new Promise((ok,no)=>{const x=new XMLHttpRequest(),f=new FormData();f.append('file',file);f.append('upload_preset',CLD.preset);x.open('POST',`https://api.cloudinary.com/v1_1/${CLD.cloud}/auto/upload`);x.upload.onprogress=e=>{if(e.lengthComputable&&onp)onp(e.loaded/e.total)};x.onload=()=>{try{const r=JSON.parse(x.responseText);r.secure_url?ok(r.secure_url):no(new Error(r.error&&r.error.message||'upload failed'))}catch(er){no(er)}};x.onerror=()=>no(new Error('network error'));x.send(f)})}
+async function upl(files,btn){const out=[];for(let i=0;i<files.length;i++){const url=await cup(files[i],p=>{if(btn)btn.textContent='Uploading '+(i+1)+'/'+files.length+' · '+Math.round(p*100)+'%'});out.push({id:'t'+Date.now()+Math.random().toString(36).slice(2,7),title:files[i].name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' '),url})}return out}
+async function pub(e){e.preventDefault();if(!me){$('#login').hidden=false;return}const b=$('#sub');b.disabled=true;
+ try{const files=[...$('#as').files],id='a'+Date.now()+Math.random().toString(36).slice(2,6),tracks=await upl(files,b);b.textContent='Saving…';
+  const a={id,uid:me.uid,title:$('#at').value.trim(),artist:$('#an').value.trim(),bio:$('#ab').value.trim(),g:Math.floor(Math.random()*6),cover:await img($('#ac').files[0],420),photo:await img($('#ap').files[0],120),soc:{instagram:$('#s1').value.trim(),youtube:$('#s2').value.trim(),spotify:$('#s3').value.trim(),tiktok:$('#s4').value.trim()},tracks,ts:Date.now()};
+  await window.klyroSave(a);toast('Published for everyone');go('alb',id)
+ }catch(err){toast('Failed: '+(err.message||'try again'));b.disabled=false;b.textContent='Publish album'}}
+function delAlb(id){if(!confirm('Delete this album?'))return;const a=albums.find(x=>x.id===id);if(!a||!own(a))return;a.tracks.forEach(x=>{liked=liked.filter(l=>l!==x.id)});save();window.klyroDel(id);if(QA&&QA.id===id){au.pause();$('#mini').hidden=true;$('#np').classList.remove('o')}go('home')}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t)return;const [k,a,b]=t.dataset.act.split('|');
  const M={open:()=>go('alb',a),nav:()=>go(a),pl:()=>play(a,+b),np:()=>$('#np').classList.add('o'),npx:()=>$('#np').classList.remove('o'),tog:()=>au.paused?au.play():au.pause(),nx:()=>step(1),pv:()=>au.currentTime>3?au.currentTime=0:step(-1),sh:()=>{shuf=!shuf;t.classList.toggle('on',shuf)},rp:()=>{rep=!rep;t.classList.toggle('on',rep)},like:()=>lk(a==='cur'?(Q[qi]||{}).id:a),flt:()=>{flt=a;render()},lf:()=>{view.f=a;render()},liked:()=>{go('lib');view.f='liked';render()},back:()=>go(view.from||'home'),del:()=>delAlb(a),add:()=>{const al=albums.find(x=>x.id===a);if(al&&own(al)){addTarget=a;$('#addf').click()}},out:()=>{if(me&&confirm('Sign out of KLYRO?'))window.klyroSignOut()}};
  if(M[k])M[k]()});
 $('#addf').onchange=async e=>{const a=albums.find(x=>x.id===addTarget),files=[...e.target.files];e.target.value='';if(!a||!own(a)||!files.length)return;toast('Adding songs…');
  try{for(const f of files){const tid=a.id+'t'+Date.now()+Math.random().toString(36).slice(2,6);await idbPut(tid,f);a.tracks.push({id:tid,title:f.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ')})}
   if(!a.uid&&me)a.uid=me.uid;save();toast(files.length+(files.length>1?' songs added':' song added'));render()}catch(err){toast('Could not add songs. Try smaller files.')}};
+$('#addf').onchange=async e=>{const a=albums.find(x=>x.id===addTarget),files=[...e.target.files];e.target.value='';if(!a||!own(a)||!files.length)return;
+ try{toast('Uploading…');const nt=await upl(files);await window.klyroAdd(a.id,nt);toast(files.length>1?'Songs added for everyone':'Song added for everyone')}catch(err){toast('Failed: '+(err.message||'try again'))}};
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('[role=button]'))e.target.click()});
 go('home');
 </script>
@@ -236,7 +249,12 @@ go('home');
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 const app=initializeApp({apiKey:"AIzaSyDVL2VpwiSonZHh3XoP1Jff_52ZZ5qbUaA",authDomain:"klyro-by-spidyyy.firebaseapp.com",projectId:"klyro-by-spidyyy",storageBucket:"klyro-by-spidyyy.firebasestorage.app",messagingSenderId:"705702340670",appId:"1:705702340670:web:adff6488e3b5da51e1096f"});
-const auth=getAuth(app);
+import {getFirestore,collection,doc,setDoc,updateDoc,deleteDoc,onSnapshot,arrayUnion} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+const auth=getAuth(app),db=getFirestore(app);
+window.klyroSave=a=>setDoc(doc(db,'albums',a.id),a);
+window.klyroAdd=(id,t)=>updateDoc(doc(db,'albums',id),{tracks:arrayUnion(...t)});
+window.klyroDel=id=>deleteDoc(doc(db,'albums',id)).catch(()=>toast('Delete failed'));
+onSnapshot(collection(db,'albums'),sn=>window.onAlbums(sn.docs.map(d=>d.data()).sort((a,b)=>(b.ts||0)-(a.ts||0))),()=>toast('Could not load albums. Check Firestore rules.'));
 window.klyroSignIn=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){const c=e.code||'';if(c==='auth/popup-closed-by-user'||c==='auth/cancelled-popup-request')return;toast(c==='auth/unauthorized-domain'?'Add this domain in Firebase > Authentication > Settings > Authorized domains':c==='auth/popup-blocked'?'Allow popups for this site and try again':'Login failed: '+c)}};
 window.klyroSignOut=()=>signOut(auth);
 onAuthStateChanged(auth,u=>window.onUser(u));
