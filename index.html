@@ -39,6 +39,7 @@ h2{font-size:19px;font-weight:700;margin:26px 0 14px}
 .pb.on svg{fill:var(--lime);stroke:var(--lime)}
 .rw{display:flex;align-items:center;gap:14px;padding:8px 0;cursor:pointer;border-radius:14px}
 .rw.on b{color:var(--lime)}
+.rw .pb{width:36px;height:36px}
 .th{width:54px;height:54px;border-radius:14px;flex:none;background-size:cover;background-position:center;display:grid;place-items:center;font-weight:800;color:rgba(255,255,255,.9)}
 .th.sm{width:40px;height:40px;border-radius:12px;background:var(--s2);color:var(--mu);font-size:13px}
 .rt{flex:1;min-width:0}.rt b,.rt small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -91,6 +92,18 @@ input[type=range]{width:100%;accent-color:var(--lime)}
 #login p{color:var(--mu);max-width:300px}
 .gb{display:flex;align-items:center;gap:12px;background:#fff;color:#1f1f1f;font-weight:700;padding:14px 26px;border-radius:99px;margin-top:18px}
 .gb svg{width:22px;height:22px}
+.lgo{border-radius:50%;object-fit:cover;display:block}
+.dr{position:fixed;inset:0;z-index:40;visibility:hidden;transition:visibility .3s}
+.dr.o{visibility:visible}
+.drb{position:absolute;inset:0;background:rgba(0,0,0,.6);opacity:0;transition:opacity .3s}
+.dr.o .drb{opacity:1}
+.drp{position:absolute;left:0;top:0;bottom:0;width:min(86%,340px);background:#1b1824;padding:calc(env(safe-area-inset-top,0px) + 18px) 14px 24px;transform:translateX(-100%);transition:transform .3s;overflow-y:auto}
+.dr.o .drp{transform:none}
+.dh{display:flex;align-items:center;gap:14px;padding:14px;background:var(--s2);border-radius:18px;margin-bottom:12px;width:100%;text-align:left}
+.dh .av{width:58px;height:58px;flex:none}.dh b{font-size:18px;display:block}.dh small{color:var(--mu)}
+.di{display:flex;align-items:center;gap:16px;padding:16px 10px;width:100%;font-size:16px;font-weight:600;border-radius:14px;text-align:left}
+.di:hover{background:var(--s2)}
+.br{display:flex;align-items:center;gap:10px}.wm{font-weight:800;letter-spacing:.08em;font-size:18px}
 .av{border:0;background-size:cover;background-position:center}
 @media(min-width:700px){.app{padding-top:10px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -106,27 +119,25 @@ input[type=range]{width:100%;accent-color:var(--lime)}
  <div class="sk"><input type="range" id="sk" min="0" max="100" value="0" aria-label="Seek"><div><span id="cur">0:00</span><span id="rem">-0:00</span></div></div>
  <div class="ct"><button data-act="sh" id="nsh" aria-label="Shuffle"></button><button data-act="pv" id="npv" aria-label="Previous"></button><button class="big" id="npp" data-act="tog" aria-label="Play or pause"></button><button data-act="nx" id="nnx" aria-label="Next"></button><button data-act="rp" id="nrp" aria-label="Repeat"></button></div>
 </section>
-<div id="login"><div class="lg">KLYRO</div><p>Your music, your mood. Stream your favorite songs, discover new artists, and vibe to every beat.</p>
+<div id="login"><img class="lgo" id="lgi" alt="" style="width:120px;height:120px;box-shadow:0 10px 40px rgba(180,30,50,.45)"><div class="lg">KLYRO</div><p>Your music, your mood. Stream your favorite songs, discover new artists, and vibe to every beat.</p>
 <button class="gb" id="gbtn"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 019.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.2A24 24 0 000 24c0 3.9.9 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.2-13.5-9.9l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/></svg>Continue with Google</button><button id="skipb" style="margin-top:4px;color:var(--mu);text-decoration:underline">Just listen for now</button></div>
 <input type="file" id="addf" accept="audio/*" multiple hidden>
+<div class="dr" id="dr"><div class="drb" data-act="drx"></div><aside class="drp" id="drp" aria-label="Account menu"></aside></div>
 <div id="toast"></div>
 <script>
 const $=s=>document.querySelector(s);
+const LOGO='data:image/jpeg;base64,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';
+$('#lgi').src=LOGO;document.querySelector('link[rel=icon]').href=LOGO;
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const P=['#c9a7ff','#ffb4a2','#9fe3ff','#c8f169','#ffc4e1','#b5b8ff'];
 const GR=[['#8b5cf6','#ff4fa3'],['#ff7a3c','#ff4fa3'],['#22d3ee','#8b5cf6'],['#84cc16','#22d3ee'],['#ff4fa3','#ffb83c'],['#6366f1','#22d3ee']];
 const bg=a=>a.cover?`background-image:url(${a.cover})`:`background-image:linear-gradient(135deg,${GR[a.g%6][0]},${GR[a.g%6][1]})`;
 const ini=t=>esc((t||'K').trim().slice(0,2).toUpperCase());
-const IC={home:'<path d="M4 11l8-7 8 7v9a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1z"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',plus:'<path d="M12 5v14M5 12h14"/>',lib:'<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',user:'<circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c.8-4 3.7-6 7.5-6s6.7 2 7.5 6"/>',heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.6-7 10-7 10z"/>',back:'<path d="M19 12H5M11 6l-6 6 6 6"/>',down:'<path d="M6 9l6 6 6-6"/>',play:'<path d="M7 4.5v15l12-7.5z" fill="currentColor" stroke="none"/>',pause:'<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor" stroke="none"/>',next:'<path d="M6 5l9 7-9 7z" fill="currentColor"/><path d="M18 5v14"/>',prev:'<path d="M18 5l-9 7 9 7z" fill="currentColor"/><path d="M6 5v14"/>',shuffle:'<path d="M3 7h3c4 0 5 10 9 10h6M3 17h3c1.5 0 2.5-1.6 3.5-3.4M13 8.5C13.7 7.6 14.6 7 15 7h6M18 4l3 3-3 3M18 14l3 3-3 3"/>',repeat:'<path d="M4 11V9a3 3 0 013-3h12M16 3l3 3-3 3M20 13v2a3 3 0 01-3 3H5M8 21l-3-3 3-3"/>'};
+const IC={home:'<path d="M4 11l8-7 8 7v9a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1z"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',plus:'<path d="M12 5v14M5 12h14"/>',lib:'<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',user:'<circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c.8-4 3.7-6 7.5-6s6.7 2 7.5 6"/>',heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.6-7 10-7 10z"/>',back:'<path d="M19 12H5M11 6l-6 6 6 6"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',trash:'<path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',out:'<path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9"/>',down:'<path d="M6 9l6 6 6-6"/>',play:'<path d="M7 4.5v15l12-7.5z" fill="currentColor" stroke="none"/>',pause:'<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor" stroke="none"/>',next:'<path d="M6 5l9 7-9 7z" fill="currentColor"/><path d="M18 5v14"/>',prev:'<path d="M18 5l-9 7 9 7z" fill="currentColor"/><path d="M6 5v14"/>',shuffle:'<path d="M3 7h3c4 0 5 10 9 10h6M3 17h3c1.5 0 2.5-1.6 3.5-3.4M13 8.5C13.7 7.6 14.6 7 15 7h6M18 4l3 3-3 3M18 14l3 3-3 3"/>',repeat:'<path d="M4 11V9a3 3 0 013-3h12M16 3l3 3-3 3M20 13v2a3 3 0 01-3 3H5M8 21l-3-3 3-3"/>'};
 const ic=n=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
 // ---------- storage ----------
 let albums=[],liked=[];
-const DEMO=[
- {id:'d1',title:'Neon Nights',artist:'Nova Kay',g:0,demo:1,bio:'Late-night synth pop for drives you don’t want to end.',soc:{},tracks:['City Glow','After Midnight','Pink Static']},
- {id:'d2',title:'Late Bloom',artist:'Mira',g:3,demo:1,bio:'Soft beats, honest words, slow growth.',soc:{},tracks:['Petals','Golden Hour','Sunday Reset']},
- {id:'d3',title:'Static Hearts',artist:'Zed Orbit',g:2,demo:1,bio:'Glitchy bass and big feelings.',soc:{},tracks:['Low Battery','Signal Lost','Reboot']}
-];
-DEMO.forEach((a,i)=>a.tracks=a.tracks.map((t,j)=>({id:a.id+'t'+j,title:t,seed:i*3+j+1})));
+const DEMO=[];
 try{liked=JSON.parse(localStorage.getItem('klyro_liked')||'[]')}catch(e){}
 const save=()=>{try{localStorage.setItem('klyro_liked',JSON.stringify(liked))}catch(e){}};
 const idb=new Promise(r=>{try{const q=indexedDB.open('klyro',1);q.onupgradeneeded=()=>q.result.createObjectStore('a');q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}});
@@ -163,10 +174,13 @@ au.ontimeupdate=()=>{$('#cur').textContent=fmt(au.currentTime);$('#rem').textCon
 $('#sk').oninput=e=>{if(au.duration)au.currentTime=e.target.value/100*au.duration};
 function lk(id){if(!id)return;const i=liked.indexOf(id);i<0?liked.push(id):liked.splice(i,1);save();toast(i<0?'Added to Liked Songs':'Removed from Liked Songs');sync();if(view.v==='alb'||view.v==='lib')render()}
 // ---------- UI pieces ----------
-let view={v:'home'},flt='all',me=null,addTarget=null;
+let view={v:'home'},flt='all',me=null,addTarget=null,prof=null;
+const pname=()=>(prof&&prof.name)||(me&&me.displayName)||'Music Lover';
+const prSoc=k=>(prof&&prof.soc&&prof.soc[k])||'';
 const skipped=()=>{try{return sessionStorage.getItem('klyro_skip')==='1'}catch(e){return false}};
-window.onUser=u=>{me=u;$('#login').hidden=!!u||skipped();render()};
-window.onAlbums=l=>{albums=l;if(QA&&!QA.demo){const n=albums.find(x=>x.id===QA.id);if(n){QA=n;Q=n.tracks}}if(view.v!=='up'&&view.v!=='search')render()};
+window.onUser=u=>{me=u;if(!u)prof=null;$('#login').hidden=!!u||skipped();render()};
+window.onProfile=p=>{prof=p;if(view.v!=='set'&&view.v!=='up'&&view.v!=='search')render()};
+window.onAlbums=l=>{albums=l;if(QA&&!QA.demo){const n=albums.find(x=>x.id===QA.id);if(n){const cid=Q[qi]&&Q[qi].id;QA=n;Q=n.tracks;qi=cid?Q.findIndex(x=>x.id===cid):qi;if(Q[qi])sync()}}if(view.v!=='up'&&view.v!=='search')render()};
 $('#gbtn').onclick=()=>window.klyroSignIn?window.klyroSignIn():toast('Login is loading, try again');
 $('#skipb').onclick=()=>{try{sessionStorage.setItem('klyro_skip','1')}catch(e){}$('#login').hidden=true};
 const NAV=[['home','home'],['search','search'],['up','plus'],['lib','lib'],['artists','user']];
@@ -183,20 +197,29 @@ const card=a=>`<button class="card" data-act="open|${a.id}"><div class="cov" sty
 const tb=(t,back)=>`<div class="top">${back?`<button class="cb" data-act="back" aria-label="Back">${ic('back')}</button>`:'<span></span>'}<span>${t}</span><span></span></div>`;
 function render(){const A=$('#app');
  if(view.v==='home'){
-  const L=flt==='c'?albums:flt==='d'?DEMO:all(),nm=me&&me.displayName?me.displayName.split(' ')[0]:'Music Lover';
-  A.innerHTML=`<div class="hd"><button class="av" data-act="out" aria-label="Account" style="${me&&me.photoURL?`background-image:url(${esc(me.photoURL)})`:''}">${me&&me.photoURL?'':'K'}</button><div class="r"><button class="cb" data-act="nav|search" aria-label="Search">${ic('search')}</button><button class="cb" data-act="liked" aria-label="Liked songs">${ic('heart')}</button></div></div>
+  const L=flt==='mine'?albums.filter(own):all(),nm=pname().split(' ')[0];
+  A.innerHTML=`<div class="hd"><div class="br"><img class="lgo" src="${LOGO}" alt="" style="width:42px;height:42px"><span class="wm">KLYRO</span></div><div class="r"><button class="cb" data-act="nav|search" aria-label="Search">${ic('search')}</button><button class="cb" data-act="liked" aria-label="Liked songs">${ic('heart')}</button><button class="av" data-act="menu" aria-label="Account menu" style="${me&&me.photoURL?`background-image:url(${esc(me.photoURL)})`:''}">${me&&me.photoURL?'':'K'}</button></div></div>
   <h1 class="hi">Hi, ${esc(nm)}</h1>
-  <div class="chips">${[['all','All'],['c','Community'],['d','Demo']].map(([k,l])=>`<button class="chip ${flt===k?'on':''}" data-act="flt|${k}">${l}</button>`).join('')}</div>
-  <h2>Curated &amp; trending</h2>${L.length?`<div class="hrow">${L.slice(0,6).map(fc).join('')}</div>`:`<div class="empty">No community albums yet. Tap + to drop the first one.</div>`}
+  <div class="chips">${[['all','All'],['mine','Yours']].map(([k,l])=>`<button class="chip ${flt===k?'on':''}" data-act="flt|${k}">${l}</button>`).join('')}</div>
+  <h2>Curated &amp; trending</h2>${L.length?`<div class="hrow">${L.slice(0,6).map(fc).join('')}</div>`:`<div class="empty">No albums yet. Tap + to upload the first one.</div>`}
   <div class="sec"><h2>Top albums</h2><button data-act="nav|lib">See all</button></div>${L.slice(0,5).map(row).join('')}`;
  }else if(view.v==='search'){
   A.innerHTML=`${tb('Search',1)}<input type="text" id="q" placeholder="Songs, albums or artists" value="${esc(view.q||'')}" autocomplete="off"><div id="rs"></div>`;
-  const q=$('#q'),run=()=>{view.q=q.value;const s=q.value.trim().toLowerCase(),r=all().filter(a=>!s||(a.title+' '+a.artist+' '+a.tracks.map(t=>t.title).join(' ')).toLowerCase().includes(s));$('#rs').innerHTML=r.length?`<h2>${s?'Results':'Browse all'}</h2><div class="grid">${r.map(card).join('')}</div>`:`<div class="empty" style="margin-top:16px">Nothing found for “${esc(q.value)}”. Try another name.</div>`};q.oninput=run;run();
+  const q=$('#q'),run=()=>{view.q=q.value;const s=q.value.trim().toLowerCase(),r=all().filter(a=>!s||(a.title+' '+a.artist+' '+a.tracks.map(t=>t.title).join(' ')).toLowerCase().includes(s));$('#rs').innerHTML=r.length?`<h2>${s?'Results':'Browse all'}</h2><div class="grid">${r.map(card).join('')}</div>`:`<div class="empty" style="margin-top:16px">${s?'Nothing found for “'+esc(q.value)+'”. Try another name.':'No albums yet. Be the first to upload one.'}</div>`};q.oninput=run;run();
  }else if(view.v==='lib'){
   const f=view.f||'all',lt=[];all().forEach(a=>a.tracks.forEach((t,i)=>{if(liked.includes(t.id))lt.push([a,t,i])}));
   A.innerHTML=`${tb('My Music',1)}<div class="chips">${[['all','All'],['mine','Yours'],['liked','Liked Songs']].map(([k,l])=>`<button class="chip ${f===k?'on':''}" data-act="lf|${k}">${l}</button>`).join('')}</div><div style="height:14px"></div>`+
   (f==='liked'?(lt.length?lt.map(([a,t,i])=>`<div class="rw" role="button" tabindex="0" data-act="pl|${a.id}|${i}"><div class="th" style="${bg(a)}">${a.cover?'':ini(a.title)}</div><div class="rt"><b>${esc(t.title)}</b><small>By ${esc(a.artist)}</small></div><button class="pb on" data-act="like|${t.id}" aria-label="Unlike">${ic('heart')}</button></div>`).join(''):`<div class="empty">Tap the heart on a song to save it here.</div>`):
   (f==='mine'?albums.filter(own):all()).map(row).join('')||`<div class="empty">You haven’t uploaded an album yet.</div>`);
+ }else if(view.v==='set'){
+  if(!me){go('home');return}
+  const sc=(prof&&prof.soc)||{};
+  A.innerHTML=`${tb('Settings',1)}<form id="sf"><div class="box"><label>Display name<input type="text" id="sn" maxlength="40" required value="${esc(pname())}"></label></div><div class="box"><b>Connect your socials <em class="note">optional</em></b><input type="url" id="t1" placeholder="Instagram URL" value="${esc(sc.instagram||'')}"><input type="url" id="t2" placeholder="YouTube URL" value="${esc(sc.youtube||'')}"><input type="url" id="t3" placeholder="Spotify URL" value="${esc(sc.spotify||'')}"><input type="url" id="t4" placeholder="TikTok URL" value="${esc(sc.tiktok||'')}"></div><button class="btn" type="submit" id="ssv">Save</button><button class="btn g" type="button" data-act="so">Sign out</button><p class="note">Your socials are filled in automatically when you create a new album.</p></form>`;
+  $('#sf').onsubmit=saveProf;
+ }else if(view.v==='prof'){
+  if(!me){go('home');return}
+  const L=Object.entries((prof&&prof.soc)||{}).filter(([k,u])=>/^https?:\/\//i.test(u)),mine=albums.filter(own);
+  A.innerHTML=`${tb('Profile',1)}<div class="ah"><div class="av" style="width:96px;height:96px;margin:0 auto 12px;font-size:32px;${me.photoURL?`background-image:url(${esc(me.photoURL)})`:''}">${me.photoURL?'':ini(pname())}</div><h1>${esc(pname())}</h1>${L.length?`<div class="soc">${L.map(([k,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(k[0].toUpperCase()+k.slice(1))}</a>`).join('')}</div>`:'<p class="note" style="margin-top:8px">No social links yet.</p>'}<div class="acts"><button class="btn" data-act="nav|set">Edit profile</button></div></div><h2>Your albums</h2>${mine.map(row).join('')||'<div class="empty">You haven’t uploaded an album yet.</div>'}`;
  }else if(view.v==='artists'){
   const m={};all().forEach(a=>{(m[a.artist]=m[a.artist]||[]).push(a)});
   A.innerHTML=`${tb('Artists',1)}<div class="grid">${Object.entries(m).map(([n,l])=>`<button class="card" data-act="open|${l[0].id}" style="text-align:center"><div class="cov" style="border-radius:50%;${l[0].photo?`background-image:url(${l[0].photo})`:bg(l[0])}">${l[0].photo?'':ini(n)}</div><b>${esc(n)}</b><small>${l.length} ${l.length>1?'albums':'album'}</small></button>`).join('')}</div>`;
@@ -208,12 +231,12 @@ function render(){const A=$('#app');
   ${a.bio?`<p class="note" style="max-width:360px;margin:0 auto">${esc(a.bio)}</p>`:''}
   ${L.length?`<div class="soc">${L.map(([k,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(k[0].toUpperCase()+k.slice(1))}</a>`).join('')}</div>`:''}
   <div class="acts"><button class="btn" data-act="pl|${a.id}|0">${ic('play')} Play album</button>${own(a)?`<button class="btn g" data-act="add|${a.id}">+ Add songs</button><button class="btn g" data-act="del|${a.id}">Delete</button>`:''}</div></div>
-  <div style="margin-top:14px">${a.tracks.map((t,i)=>{const on=QA&&QA.id===a.id&&qi===i;return `<div class="rw ${on?'on':''}" role="button" tabindex="0" data-act="pl|${a.id}|${i}"><div class="th sm">${on?ic('play'):i+1}</div><div class="rt"><b>${esc(t.title)}</b><small>${esc(a.artist)}</small></div><button class="pb ${liked.includes(t.id)?'on':''}" data-act="like|${t.id}" aria-label="Like">${ic('heart')}</button></div>`}).join('')}</div>`;
+  <div style="margin-top:14px">${a.tracks.map((t,i)=>{const on=QA&&QA.id===a.id&&qi===i;return `<div class="rw ${on?'on':''}" role="button" tabindex="0" data-act="pl|${a.id}|${i}"><div class="th sm">${on?ic('play'):i+1}</div><div class="rt"><b>${esc(t.title)}</b><small>${esc(a.artist)}</small></div>${own(a)?`<button class="pb" data-act="ren|${a.id}|${i}" aria-label="Rename song">${ic('edit')}</button><button class="pb" data-act="rm|${a.id}|${i}" aria-label="Remove song">${ic('trash')}</button>`:''}<button class="pb ${liked.includes(t.id)?'on':''}" data-act="like|${t.id}" aria-label="Like">${ic('heart')}</button></div>`}).join('')}</div>`;
  }else{
-  A.innerHTML=`${tb('Create album',1)}<form id="f"><div class="box"><label>Album title<input type="text" id="at" required maxlength="60" placeholder="Midnight Tapes"></label><label>Artist name<input type="text" id="an" required maxlength="40" placeholder="Your name" value="${esc(me&&me.displayName||'')}"></label></div>
+  A.innerHTML=`${tb('Create album',1)}<form id="f"><div class="box"><label>Album title<input type="text" id="at" required maxlength="60" placeholder="Midnight Tapes"></label><label>Artist name<input type="text" id="an" required maxlength="40" placeholder="Your name" value="${esc(me?pname():'')}"></label></div>
   <label>Bio <em>optional</em><textarea id="ab" rows="2" maxlength="200" placeholder="One line about you or this album"></textarea></label>
   <label>Album cover <em>optional</em><input type="file" id="ac" accept="image/*"></label><label>Artist photo <em>optional</em><input type="file" id="ap" accept="image/*"></label>
-  <div class="box"><b>Social links <em class="note">optional</em></b><input type="url" id="s1" placeholder="Instagram URL"><input type="url" id="s2" placeholder="YouTube URL"><input type="url" id="s3" placeholder="Spotify URL"><input type="url" id="s4" placeholder="TikTok URL"></div>
+  <div class="box"><b>Social links <em class="note">optional</em></b><input type="url" id="s1" placeholder="Instagram URL" value="${esc(prSoc('instagram'))}"><input type="url" id="s2" placeholder="YouTube URL" value="${esc(prSoc('youtube'))}"><input type="url" id="s3" placeholder="Spotify URL" value="${esc(prSoc('spotify'))}"><input type="url" id="s4" placeholder="TikTok URL" value="${esc(prSoc('tiktok'))}"></div>
   <label>Songs<input type="file" id="as" accept="audio/*" multiple required><span class="note">Pick one or more audio files. Song titles come from file names.</span></label>
   <button class="btn" type="submit" id="sub">Publish album</button><p class="note">Your album goes live for everyone. Only you can add songs to it or delete it.</p></form>`;
   $('#f').onsubmit=pub;
@@ -233,9 +256,21 @@ async function pub(e){e.preventDefault();if(!me){$('#login').hidden=false;return
   const a={id,uid:me.uid,title:$('#at').value.trim(),artist:$('#an').value.trim(),bio:$('#ab').value.trim(),g:Math.floor(Math.random()*6),cover:await img($('#ac').files[0],420),photo:await img($('#ap').files[0],120),soc:{instagram:$('#s1').value.trim(),youtube:$('#s2').value.trim(),spotify:$('#s3').value.trim(),tiktok:$('#s4').value.trim()},tracks,ts:Date.now()};
   await window.klyroSave(a);toast('Published for everyone');go('alb',id)
  }catch(err){toast('Failed: '+(err.message||'try again'));b.disabled=false;b.textContent='Publish album'}}
+async function saveProf(e){e.preventDefault();if(!me)return;const b=$('#ssv');b.disabled=true;
+ const p={uid:me.uid,name:$('#sn').value.trim()||me.displayName||'',soc:{instagram:$('#t1').value.trim(),youtube:$('#t2').value.trim(),spotify:$('#t3').value.trim(),tiktok:$('#t4').value.trim()}};
+ try{await window.klyroProfile(p);prof=p;toast('Profile saved');go('prof')}catch(er){toast('Could not save. Check Firestore rules.');b.disabled=false}}
+function openDr(){const p=pname();$('#drp').innerHTML=`<button class="dh" data-act="dnav|prof"><div class="av" style="${me.photoURL?`background-image:url(${esc(me.photoURL)})`:''}">${me.photoURL?'':ini(p)}</div><div><b>${esc(p)}</b><small>View profile</small></div></button><button class="di" data-act="dmine">${ic('lib')}Your albums</button><button class="di" data-act="dliked">${ic('heart')}Liked songs</button><button class="di" data-act="dnav|set">${ic('gear')}Settings and privacy</button><button class="di" data-act="so">${ic('out')}Sign out</button>`;$('#dr').classList.add('o')}
+const closeDr=()=>$('#dr').classList.remove('o');
+async function renSong(aid,i){const a=albums.find(x=>x.id===aid);if(!a||!own(a))return;const t=a.tracks[i];if(!t)return;const n=prompt('Rename song',t.title);if(n===null)return;const v=n.trim().slice(0,80);if(!v||v===t.title)return;
+ try{await window.klyroTracks(aid,a.tracks.map((x,j)=>j===i?{...x,title:v}:x));toast('Song renamed')}catch(e){toast('Rename failed')}}
+async function rmSong(aid,i){const a=albums.find(x=>x.id===aid);if(!a||!own(a))return;const t=a.tracks[i];if(!t)return;
+ if(a.tracks.length<2){toast('An album needs at least one song. Delete the album instead.');return}
+ if(!confirm('Remove “'+t.title+'” from this album?'))return;
+ const was=QA&&QA.id===aid&&Q[qi]&&Q[qi].id===t.id;
+ try{await window.klyroTracks(aid,a.tracks.filter((x,j)=>j!==i));liked=liked.filter(l=>l!==t.id);save();if(was){au.pause();$('#mini').hidden=true;$('#np').classList.remove('o');QA=null;Q=[];qi=-1}toast('Song removed')}catch(e){toast('Remove failed')}}
 function delAlb(id){if(!confirm('Delete this album?'))return;const a=albums.find(x=>x.id===id);if(!a||!own(a))return;a.tracks.forEach(x=>{liked=liked.filter(l=>l!==x.id)});save();window.klyroDel(id);if(QA&&QA.id===id){au.pause();$('#mini').hidden=true;$('#np').classList.remove('o')}go('home')}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t)return;const [k,a,b]=t.dataset.act.split('|');
- const M={open:()=>go('alb',a),nav:()=>go(a),pl:()=>play(a,+b),np:()=>$('#np').classList.add('o'),npx:()=>$('#np').classList.remove('o'),tog:()=>au.paused?au.play():au.pause(),nx:()=>step(1),pv:()=>au.currentTime>3?au.currentTime=0:step(-1),sh:()=>{shuf=!shuf;t.classList.toggle('on',shuf)},rp:()=>{rep=!rep;t.classList.toggle('on',rep)},like:()=>lk(a==='cur'?(Q[qi]||{}).id:a),flt:()=>{flt=a;render()},lf:()=>{view.f=a;render()},liked:()=>{go('lib');view.f='liked';render()},back:()=>go(view.from||'home'),del:()=>delAlb(a),add:()=>{const al=albums.find(x=>x.id===a);if(al&&own(al)){addTarget=a;$('#addf').click()}},out:()=>{if(me&&confirm('Sign out of KLYRO?'))window.klyroSignOut()}};
+ const M={open:()=>go('alb',a),nav:()=>go(a),pl:()=>play(a,+b),np:()=>$('#np').classList.add('o'),npx:()=>$('#np').classList.remove('o'),tog:()=>au.paused?au.play():au.pause(),nx:()=>step(1),pv:()=>au.currentTime>3?au.currentTime=0:step(-1),sh:()=>{shuf=!shuf;t.classList.toggle('on',shuf)},rp:()=>{rep=!rep;t.classList.toggle('on',rep)},like:()=>lk(a==='cur'?(Q[qi]||{}).id:a),flt:()=>{flt=a;render()},lf:()=>{view.f=a;render()},liked:()=>{go('lib');view.f='liked';render()},back:()=>go(view.from||'home'),del:()=>delAlb(a),ren:()=>renSong(a,+b),rm:()=>rmSong(a,+b),menu:()=>{if(!me){$('#login').hidden=false;return}openDr()},drx:closeDr,dnav:()=>{closeDr();go(a)},dmine:()=>{closeDr();go('lib');view.f='mine';render()},dliked:()=>{closeDr();go('lib');view.f='liked';render()},so:()=>{if(confirm('Sign out of KLYRO?')){closeDr();window.klyroSignOut()}},add:()=>{const al=albums.find(x=>x.id===a);if(al&&own(al)){addTarget=a;$('#addf').click()}},out:()=>{if(me&&confirm('Sign out of KLYRO?'))window.klyroSignOut()}};
  if(M[k])M[k]()});
 $('#addf').onchange=async e=>{const a=albums.find(x=>x.id===addTarget),files=[...e.target.files];e.target.value='';if(!a||!own(a)||!files.length)return;toast('Adding songs…');
  try{for(const f of files){const tid=a.id+'t'+Date.now()+Math.random().toString(36).slice(2,6);await idbPut(tid,f);a.tracks.push({id:tid,title:f.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ')})}
@@ -253,11 +288,14 @@ import {getFirestore,collection,doc,setDoc,updateDoc,deleteDoc,onSnapshot,arrayU
 const auth=getAuth(app),db=getFirestore(app);
 window.klyroSave=a=>setDoc(doc(db,'albums',a.id),a);
 window.klyroAdd=(id,t)=>updateDoc(doc(db,'albums',id),{tracks:arrayUnion(...t)});
+window.klyroTracks=(id,t)=>updateDoc(doc(db,'albums',id),{tracks:t});
 window.klyroDel=id=>deleteDoc(doc(db,'albums',id)).catch(()=>toast('Delete failed'));
 onSnapshot(collection(db,'albums'),sn=>window.onAlbums(sn.docs.map(d=>d.data()).sort((a,b)=>(b.ts||0)-(a.ts||0))),()=>toast('Could not load albums. Check Firestore rules.'));
 window.klyroSignIn=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){const c=e.code||'';if(c==='auth/popup-closed-by-user'||c==='auth/cancelled-popup-request')return;toast(c==='auth/unauthorized-domain'?'Add this domain in Firebase > Authentication > Settings > Authorized domains':c==='auth/popup-blocked'?'Allow popups for this site and try again':'Login failed: '+c)}};
 window.klyroSignOut=()=>signOut(auth);
-onAuthStateChanged(auth,u=>window.onUser(u));
+let unp=null;
+onAuthStateChanged(auth,u=>{window.onUser(u);if(unp){unp();unp=null}if(u)unp=onSnapshot(doc(db,'users',u.uid),d=>window.onProfile(d.exists()?d.data():null),()=>{})});
+window.klyroProfile=p=>setDoc(doc(db,'users',p.uid),p);
 </script>
 </body>
 </html>
