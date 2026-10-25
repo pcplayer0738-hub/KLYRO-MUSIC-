@@ -65,7 +65,7 @@ input[type=file]{color:var(--mu);font-size:13px}
 #mini[hidden]{display:none}
 #mini .th{width:44px;height:44px;border-radius:12px}
 #nv{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(100% - 28px,420px);z-index:7;display:flex;justify-content:space-between;padding:8px;border-radius:32px;background:rgba(44,38,58,.88);backdrop-filter:blur(18px);box-shadow:0 10px 40px rgba(0,0,0,.5)}
-#nv button{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#cfc9de;transition:background .2s}
+#nv button{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#cfc9de;transition:background .2s}
 #nv button.on{background:var(--lime);color:#141018}
 .np{position:fixed;inset:0;z-index:20;background:var(--bg);overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 18px) 24px calc(env(safe-area-inset-bottom,0px) + 28px);transition:transform .35s,visibility .35s}
 .np:not(.o){transform:translateY(100%);visibility:hidden}
@@ -104,6 +104,25 @@ input[type=range]{width:100%;accent-color:var(--lime)}
 .di{display:flex;align-items:center;gap:16px;padding:16px 10px;width:100%;font-size:16px;font-weight:600;border-radius:14px;text-align:left}
 .di:hover{background:var(--s2)}
 .br{display:flex;align-items:center;gap:10px}
+.vf{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--lime);color:#111;font-size:10px;font-weight:800;margin-left:6px;vertical-align:middle}.mu2{color:var(--mu)}.vf.gold{background:#ffd23c}
+select{background:var(--s1);border:1px solid var(--ln);border-radius:16px;padding:13px 16px;width:100%;color:#fff}
+.pc{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--s1);border:1px solid var(--ln);border-radius:20px;padding:16px;position:relative;margin-bottom:14px}
+.pc.best{border-color:var(--lime);box-shadow:0 0 0 1px var(--lime) inset}
+.ptag{position:absolute;top:-10px;left:14px;background:var(--lime);color:#141018;font-size:11px;font-weight:800;padding:3px 10px;border-radius:99px}
+.hero2{margin:0 -20px;padding:56px 20px 24px;background:linear-gradient(180deg,rgba(140,30,100,.5),rgba(13,10,20,0)),radial-gradient(70% 60% at 85% 0%,rgba(200,241,105,.22),transparent 70%)}
+.hero2 .pbrand{font-size:22px}.hero2 h1{font-size:34px;line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:22px 0 18px}
+.oe{display:inline-flex;align-items:center;gap:8px;background:#1f1b2b;padding:8px 12px;border-radius:8px;font-weight:600;margin-bottom:22px}
+.cta{display:block;width:100%;padding:16px;border-radius:99px;font-weight:800;font-size:16px;text-align:center;color:#111}
+.cta.w{background:#fff}
+.why{background:#1b1824;border-radius:18px;margin:6px 0 10px}.why h3{padding:22px 20px;font-size:22px;font-weight:800;border-bottom:1px solid var(--ln)}.why ul{list-style:none;padding:18px 20px 22px;display:grid;gap:20px;margin:0}.why li{display:flex;gap:16px;align-items:center;font-size:16px}
+.pcard{background:#1b1824;border-radius:18px;padding:0 20px 20px;margin-bottom:18px;overflow:hidden}
+.pt{display:inline-block;margin:0 0 18px -20px;padding:12px 18px;border-radius:0 0 12px 0;font-weight:800;color:#111}.pt.nt{padding:0;margin-bottom:22px}
+.pbrand{display:flex;align-items:center;gap:8px;font-weight:800}.pbrand img{width:24px;height:24px;border-radius:50%}
+.pn{font-size:36px;font-weight:800;margin:10px 0 6px}.pprice{font-weight:800;font-size:20px}.pold{color:var(--mu);font-size:15px}
+.pcard hr{border:0;border-top:1px solid var(--ln);margin:16px 0}
+.pcard ul{padding-left:20px;display:grid;gap:6px;font-size:15px;margin:0 0 20px}
+.pcard .fine{color:var(--mu);font-size:12px;text-align:center;margin-top:14px}
+.pp{margin:4px 0}.pp s{color:var(--mu)}.pp strong{font-size:24px}
 .don{background:linear-gradient(135deg,#3a2466,#5a2149);border-radius:22px;padding:18px;margin:26px 0;display:grid;gap:6px}.don b{font-size:17px}.don span{color:#d8d0ea;font-size:13px}
 .rw .pb.vt{width:auto;padding:0 14px;gap:6px;border-radius:99px;font-weight:700}
 #nd{text-align:center;color:#cfc9de;font-size:13px;margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.wm{font-weight:800;letter-spacing:.08em;font-size:18px}
@@ -136,7 +155,7 @@ const P=['#c9a7ff','#ffb4a2','#9fe3ff','#c8f169','#ffc4e1','#b5b8ff'];
 const GR=[['#8b5cf6','#ff4fa3'],['#ff7a3c','#ff4fa3'],['#22d3ee','#8b5cf6'],['#84cc16','#22d3ee'],['#ff4fa3','#ffb83c'],['#6366f1','#22d3ee']];
 const bg=a=>a.cover?`background-image:url(${a.cover})`:`background-image:linear-gradient(135deg,${GR[a.g%6][0]},${GR[a.g%6][1]})`;
 const ini=t=>esc((t||'K').trim().slice(0,2).toUpperCase());
-const IC={home:'<path d="M4 11l8-7 8 7v9a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1z"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',plus:'<path d="M12 5v14M5 12h14"/>',lib:'<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',user:'<circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c.8-4 3.7-6 7.5-6s6.7 2 7.5 6"/>',heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.6-7 10-7 10z"/>',back:'<path d="M19 12H5M11 6l-6 6 6 6"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',trash:'<path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/>',share:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/>',star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',up:'<path d="M12 19V5M6 11l6-6 6 6"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',out:'<path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9"/>',down:'<path d="M6 9l6 6 6-6"/>',play:'<path d="M7 4.5v15l12-7.5z" fill="currentColor" stroke="none"/>',pause:'<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor" stroke="none"/>',next:'<path d="M6 5l9 7-9 7z" fill="currentColor"/><path d="M18 5v14"/>',prev:'<path d="M18 5l-9 7 9 7z" fill="currentColor"/><path d="M6 5v14"/>',shuffle:'<path d="M3 7h3c4 0 5 10 9 10h6M3 17h3c1.5 0 2.5-1.6 3.5-3.4M13 8.5C13.7 7.6 14.6 7 15 7h6M18 4l3 3-3 3M18 14l3 3-3 3"/>',repeat:'<path d="M4 11V9a3 3 0 013-3h12M16 3l3 3-3 3M20 13v2a3 3 0 01-3 3H5M8 21l-3-3 3-3"/>'};
+const IC={home:'<path d="M4 11l8-7 8 7v9a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1z"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',plus:'<path d="M12 5v14M5 12h14"/>',lib:'<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',user:'<circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c.8-4 3.7-6 7.5-6s6.7 2 7.5 6"/>',heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.6-7 10-7 10z"/>',back:'<path d="M19 12H5M11 6l-6 6 6 6"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',trash:'<path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/>',share:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/>',star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',up:'<path d="M12 19V5M6 11l6-6 6 6"/>',gem:'<path d="M6 4h12l4 6-10 11L2 10z"/><path d="M2 10h20M9 4l-2 6 5 11 5-11-2-6"/>',chart:'<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>',check:'<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>',pin:'<path d="M12 17v5M8 3h8l-1 7 3 3H6l3-3z"/>',upl:'<path d="M12 16V4M7 9l5-5 5 5M4 20h16"/>',bolt:'<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',out:'<path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9"/>',down:'<path d="M6 9l6 6 6-6"/>',play:'<path d="M7 4.5v15l12-7.5z" fill="currentColor" stroke="none"/>',pause:'<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor" stroke="none"/>',next:'<path d="M6 5l9 7-9 7z" fill="currentColor"/><path d="M18 5v14"/>',prev:'<path d="M18 5l-9 7 9 7z" fill="currentColor"/><path d="M6 5v14"/>',shuffle:'<path d="M3 7h3c4 0 5 10 9 10h6M3 17h3c1.5 0 2.5-1.6 3.5-3.4M13 8.5C13.7 7.6 14.6 7 15 7h6M18 4l3 3-3 3M18 14l3 3-3 3"/>',repeat:'<path d="M4 11V9a3 3 0 013-3h12M16 3l3 3-3 3M20 13v2a3 3 0 01-3 3H5M8 21l-3-3 3-3"/>'};
 const ic=n=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
 // ---------- storage ----------
 let albums=[],liked=[];
@@ -173,6 +192,8 @@ const upd=()=>{const x=au.paused?ic('play'):ic('pause');$('#mpp').innerHTML=x;$(
 function step(d){if(!Q.length)return;const n=shuf?Math.floor(Math.random()*Q.length):(qi+d+Q.length)%Q.length;play(QA.id,n)}
 au.onplay=au.onpause=upd;
 au.onended=()=>{if(shuf||qi<Q.length-1||rep)step(1)};
+const counted=new Set();
+au.addEventListener('timeupdate',()=>{const t=Q[qi];if(!t||!QA||QA.demo||au.currentTime<5||counted.has(t.id)||(me&&QA.uid===me.uid))return;counted.add(t.id);if(window.klyroStat)window.klyroStat(QA.id,t.id,'plays')})
 au.ontimeupdate=()=>{$('#cur').textContent=fmt(au.currentTime);$('#rem').textContent='-'+fmt(au.duration-au.currentTime);$('#sk').value=au.duration?au.currentTime/au.duration*100:0};
 $('#sk').oninput=e=>{if(au.duration)au.currentTime=e.target.value/100*au.duration};
 function lk(id){if(!id)return;const i=liked.indexOf(id);i<0?liked.push(id):liked.splice(i,1);save();toast(i<0?'Added to Liked Songs':'Removed from Liked Songs');sync();if(view.v==='alb'||view.v==='lib')render()}
@@ -180,25 +201,35 @@ function lk(id){if(!id)return;const i=liked.indexOf(id);i<0?liked.push(id):liked
 let view={v:'home'},flt='all',me=null,addTarget=null,prof=null;
 const pname=()=>(prof&&prof.name)||(me&&me.displayName)||'Music Lover';
 const UPI_ID='shagunsachan0738@okaxis';
-const QS=new URLSearchParams(location.search),SH={a:QS.get('a'),s:QS.get('s')};let shDone=false,wishes=[];
+const QS=new URLSearchParams(location.search),SH={a:QS.get('a'),s:QS.get('s')};let shDone=false,wishes=[],prem={},stt={};
+const FREE={albums:1,songs:10},OFFER_END=Date.parse('2026-11-30T23:59:59');
+const offerOn=()=>Date.now()<OFFER_END;
+const PLANS={
+ month:{name:'Monthly',price:99,old:0,tag:'',col:'#c8f169',head:'Premium',sub:'₹99 / month',bul:['Unlimited albums and songs','Per-song plays and link opens','Verified ✔ badge','Featured on Home','Pin 1 song to your profile','One-time payment, no auto-renew']},
+ quarter:{name:'3 Months',price:169,old:297,tag:'₹169 for 3 months',col:'#ff8bc4',head:'Premium',sub:'3 months',bul:['Everything in Monthly','Save ₹128 vs paying monthly','One-time payment, no auto-renew']},
+ year:{name:'1 Year Pro',price:799,old:999,tag:'₹799 for 12 months',col:'#ffd23c',head:'Pro',sub:'12 months',bul:['Everything in Premium','Gold verified ✔ badge','#1 spot in the Featured row','Pin up to 3 songs on your profile','Save ₹200 vs the regular price','One-time payment, no auto-renew']}};
+const priceOf=k=>{const p=PLANS[k];return offerOn()||!p.old?p.price:p.old};
+let lastPlan='year';
 const prSoc=k=>(prof&&prof.soc&&prof.soc[k])||'';
 const skipped=()=>{try{return sessionStorage.getItem('klyro_skip')==='1'}catch(e){return false}};
 window.onUser=u=>{me=u;if(!u)prof=null;$('#login').hidden=!!u||skipped()||!!SH.a;render()};
 window.onProfile=p=>{prof=p;if(view.v!=='set'&&view.v!=='up'&&view.v!=='search')render()};
+window.onPrem=m=>{prem=m;if(!['up','search','set','wish'].includes(view.v))render()};
+window.onStats=m=>{stt=m;if(view.v==='prof'||view.v==='alb')render()};
 window.onWishes=l=>{wishes=l;if(view.v==='wish'&&!($('#wt')&&$('#wt').value))render()};
-window.onAlbums=(l,fc)=>{albums=l;if(QA&&!QA.demo){const n=albums.find(x=>x.id===QA.id);if(n){const cid=Q[qi]&&Q[qi].id;QA=n;Q=n.tracks;qi=cid?Q.findIndex(x=>x.id===cid):qi;if(Q[qi])sync()}}{const al=SH.a&&albums.find(x=>x.id===SH.a);if(SH.a&&!shDone&&(al||!fc)){shDone=true;if(al){go('alb',al.id);const i=SH.s?al.tracks.findIndex(t=>t.id===SH.s):-1;if(i>=0){play(al.id,i);$('#np').classList.add('o')}}else toast('This album is no longer available')}}
+window.onAlbums=(l,fc)=>{albums=l;if(QA&&!QA.demo){const n=albums.find(x=>x.id===QA.id);if(n){const cid=Q[qi]&&Q[qi].id;QA=n;Q=n.tracks;qi=cid?Q.findIndex(x=>x.id===cid):qi;if(Q[qi])sync()}}{const al=SH.a&&albums.find(x=>x.id===SH.a);if(SH.a&&!shDone&&(al||!fc)){shDone=true;if(al){go('alb',al.id);const i=SH.s?al.tracks.findIndex(t=>t.id===SH.s):-1;if(i>=0){play(al.id,i);$('#np').classList.add('o');if(window.klyroStat)window.klyroStat(al.id,SH.s,'opens')}}else toast('This album is no longer available')}}
  if(view.v!=='up'&&view.v!=='search')render()};
 $('#gbtn').onclick=()=>window.klyroSignIn?window.klyroSignIn():toast('Login is loading, try again');
 $('#skipb').onclick=()=>{try{sessionStorage.setItem('klyro_skip','1')}catch(e){}$('#login').hidden=true};
-const NAV=[['home','home'],['search','search'],['up','plus'],['lib','lib'],['artists','user']];
-$('#nv').innerHTML=NAV.map(([k,i])=>`<button data-act="nav|${k}" data-n="${k}" aria-label="${k==='up'?'Create album':k==='lib'?'My Music':k[0].toUpperCase()+k.slice(1)}">${ic(i)}</button>`).join('');
+const NAV=[['home','home'],['search','search'],['up','plus'],['lib','lib'],['prem','gem'],['artists','user']];
+$('#nv').innerHTML=NAV.map(([k,i])=>`<button data-act="nav|${k}" data-n="${k}" aria-label="${k==='up'?'Create album':k==='lib'?'My Music':k==='prem'?'Artist Premium':k[0].toUpperCase()+k.slice(1)}">${ic(i)}</button>`).join('');
 $('#nx0').innerHTML=ic('down');$('#nsh').innerHTML=ic('shuffle');$('#npv').innerHTML=ic('prev');$('#nnx').innerHTML=ic('next');$('#nrp').innerHTML=ic('repeat');$('#mnx').innerHTML=ic('next');$('#nsr').innerHTML=ic('share');upd();
-const NAVV={home:'home',alb:'home',search:'search',lib:'lib',up:'up',artists:'artists'};
+const NAVV={home:'home',alb:'home',search:'search',lib:'lib',up:'up',prem:'prem',artists:'artists'};
 function go(v,id){if(v==='up'&&!me){$('#login').hidden=false;toast('Sign in to upload your music');return}const from=view.v==='alb'?view.from:view.v;view={v,id,from:v==='alb'?from:undefined};document.querySelectorAll('#nv [data-n]').forEach(t=>{const on=t.dataset.n===NAVV[v];t.classList.toggle('on',on);on?t.setAttribute('aria-current','page'):t.removeAttribute('aria-current')});render();scrollTo(0,0)}
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('s');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('s'),2400)}
 const own=a=>!a.demo&&!!me&&a.uid===me.uid;
 const ns=a=>`${a.tracks.length} ${a.tracks.length==1?'Song':'Songs'}`;
-const row=a=>`<div class="rw" role="button" tabindex="0" data-act="open|${a.id}"><div class="th" style="${bg(a)}">${a.cover?'':ini(a.title)}</div><div class="rt"><b>${esc(a.title)}</b><small>By ${esc(a.artist)} • ${ns(a)}</small></div><button class="pb" data-act="pl|${a.id}|0" aria-label="Play ${esc(a.title)}">${ic('play')}</button></div>`;
+const row=a=>`<div class="rw" role="button" tabindex="0" data-act="open|${a.id}"><div class="th" style="${bg(a)}">${a.cover?'':ini(a.title)}</div><div class="rt"><b>${esc(a.title)}</b><small>By ${esc(a.artist)}${vb(a.uid)} • ${ns(a)}</small></div><button class="pb" data-act="pl|${a.id}|0" aria-label="Play ${esc(a.title)}">${ic('play')}</button></div>`;
 const fc=a=>`<div class="fc" role="button" tabindex="0" style="background:${P[a.g%6]}" data-act="open|${a.id}"><div class="ft"><small>${a.demo?'Demo album':'New drop'}</small><b>${esc(a.title)}</b><span>${esc(a.bio||'By '+a.artist)}</span><button class="pb dk" data-act="pl|${a.id}|0" aria-label="Play ${esc(a.title)}">${ic('play')}</button></div><div class="fi" style="${bg(a)}">${a.cover?'':ini(a.title)}</div></div>`;
 const card=a=>`<button class="card" data-act="open|${a.id}"><div class="cov" style="${bg(a)}">${a.cover?'':ini(a.title)}</div><b>${esc(a.title)}</b><small>${esc(a.artist)}</small></button>`;
 const tb=(t,back)=>`<div class="top">${back?`<button class="cb" data-act="back" aria-label="Back">${ic('back')}</button>`:'<span></span>'}<span>${t}</span><span></span></div>`;
@@ -208,7 +239,7 @@ function render(){const A=$('#app');
   A.innerHTML=`<div class="hd"><div class="br"><img class="lgo" src="${LOGO}" alt="" style="width:42px;height:42px"><span class="wm">KLYRO</span></div><div class="r"><button class="cb" data-act="nav|search" aria-label="Search">${ic('search')}</button><button class="cb" data-act="liked" aria-label="Liked songs">${ic('heart')}</button><button class="av" data-act="menu" aria-label="Account menu" style="${me&&me.photoURL?`background-image:url(${esc(me.photoURL)})`:''}">${me&&me.photoURL?'':'K'}</button></div></div>
   <h1 class="hi">Hi, ${esc(nm)}</h1>
   <div class="chips">${[['all','All'],['mine','Yours']].map(([k,l])=>`<button class="chip ${flt===k?'on':''}" data-act="flt|${k}">${l}</button>`).join('')}</div>
-  <h2>Curated &amp; trending</h2>${L.length?`<div class="hrow">${L.slice(0,6).map(fc).join('')}</div>`:`<div class="empty">No albums yet. Tap + to upload the first one.</div>`}
+  ${(f=>f.length?`<h2>Featured artists ✨</h2><div class="hrow">${f.slice(0,6).map(fc).join('')}</div>`:'')(albums.filter(a=>isPrem(a.uid)).sort((x,y)=>pr(y.uid)-pr(x.uid)))}<h2>Curated &amp; trending</h2>${L.length?`<div class="hrow">${L.slice(0,6).map(fc).join('')}</div>`:`<div class="empty">No albums yet. Tap + to upload the first one.</div>`}
   <div class="sec"><h2>Top albums</h2><button data-act="nav|lib">See all</button></div>${L.slice(0,5).map(row).join('')}${donH()}`;
  }else if(view.v==='search'){
   A.innerHTML=`${tb('Search',1)}<input type="text" id="q" placeholder="Songs, albums or artists" value="${esc(view.q||'')}" autocomplete="off"><div id="rs"></div>`;
@@ -226,7 +257,17 @@ function render(){const A=$('#app');
  }else if(view.v==='prof'){
   if(!me){go('home');return}
   const L=Object.entries((prof&&prof.soc)||{}).filter(([k,u])=>/^https?:\/\//i.test(u)),mine=albums.filter(own);
-  A.innerHTML=`${tb('Profile',1)}<div class="ah"><div class="av" style="width:96px;height:96px;margin:0 auto 12px;font-size:32px;${me.photoURL?`background-image:url(${esc(me.photoURL)})`:''}">${me.photoURL?'':ini(pname())}</div><h1>${esc(pname())}</h1>${L.length?`<div class="soc">${L.map(([k,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(k[0].toUpperCase()+k.slice(1))}</a>`).join('')}</div>`:'<p class="note" style="margin-top:8px">No social links yet.</p>'}<div class="acts"><button class="btn" data-act="nav|set">Edit profile</button></div></div><h2>Your albums</h2>${mine.map(row).join('')||'<div class="empty">You haven’t uploaded an album yet.</div>'}`;
+  const anal=profAnal(mine),pinH=pinHtml();A.innerHTML=`${tb('Profile',1)}<div class="ah"><div class="av" style="width:96px;height:96px;margin:0 auto 12px;font-size:32px;${me.photoURL?`background-image:url(${esc(me.photoURL)})`:''}">${me.photoURL?'':ini(pname())}</div><h1>${esc(pname())}${vb(me.uid)}</h1>${L.length?`<div class="soc">${L.map(([k,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(k[0].toUpperCase()+k.slice(1))}</a>`).join('')}</div>`:'<p class="note" style="margin-top:8px">No social links yet.</p>'}<div class="acts"><button class="btn" data-act="nav|set">Edit profile</button><button class="btn g" data-act="nav|prem">Artist Premium</button></div></div>${pinH}${anal}<h2>Your albums</h2>${mine.map(row).join('')||'<div class="empty">You haven’t uploaded an album yet.</div>'}`;
+ }else if(view.v==='prem'){
+  const act=!!me&&isPrem(me.uid),p0=(me&&prem[me.uid])||{},um=untilMs(p0),pln=PLANS[p0.plan];
+  const left=Math.max(1,Math.ceil((OFFER_END-Date.now())/864e5));
+  const WHY=[['upl','Unlimited albums and songs'],['chart','Per-song plays and link opens'],['check','Verified ✔ badge on your name'],['star','Featured on the Home page'],['pin','Pin your best songs to your profile']];
+  const card=([k,p])=>`<div class="pcard">${p.tag&&offerOn()?`<span class="pt" style="background:${p.col}">${p.tag}</span>`:'<span class="pt nt"></span>'}<div class="pbrand"><img src="${LOGO}" alt="">Artist ${p.head}</div><div class="pn" style="color:${p.col}">${p.name}</div><div class="pprice">${offerOn()||!p.old?'₹'+p.price:'₹'+p.old} <span class="pold" style="font-weight:500">${p.sub}${offerOn()&&p.old?' · <s>₹'+p.old+'</s>':''}</span></div><hr><ul>${p.bul.map(b=>`<li>${b}</li>`).join('')}</ul><button class="cta" style="background:${p.col}" data-act="buy|${k}">${act?'Renew':'Get'} ${p.name} · ₹${priceOf(k)}</button><p class="fine">Pay by UPI. Premium turns on after we verify your payment.</p></div>`;
+  A.innerHTML=`<div class="hero2"><div class="pbrand"><img src="${LOGO}" alt="">Artist Premium</div>${act?`<h1>You are Artist ${pln&&pln.head==='Pro'?'Pro':'Premium'} ⭐</h1><p class="mu2">${pln?pln.name+' · ':''}${um?'Active until '+new Date(um).toLocaleDateString():'Active'}</p>`:`<h1>Get 12 months of Artist Pro at ₹${priceOf('year')}</h1>${offerOn()?`<div class="oe">${ic('bolt')} Offer ends in ${left} ${left>1?'days':'day'}</div>`:''}<button class="cta w" data-act="buy|year">Get Artist Pro</button><p class="note" style="margin-top:12px">${offerOn()?'Limited time offer. ':''}Pay by UPI. See other plans below.</p>`}</div>
+  <div class="why"><h3>Why join Artist Premium?</h3><ul>${WHY.map(w=>`<li>${ic(w[0])}<span>${w[1]}</span></li>`).join('')}</ul></div>
+  <h2 style="font-size:24px">Available plans</h2>${Object.entries(PLANS).map(card).join('')}
+  ${me?`<h2>After you pay</h2><p class="note">Pick your plan, enter the UPI transaction ID and tap the button. Premium turns on after we check the payment.</p><form id="pf" style="margin-top:10px"><select id="pl" aria-label="Plan">${Object.entries(PLANS).map(([k,p])=>`<option value="${k}" ${k===lastPlan?'selected':''}>${p.name} · ₹${priceOf(k)}</option>`).join('')}</select><input type="text" id="tx" maxlength="60" placeholder="UPI transaction ID" required><button class="btn" type="submit">I’ve paid</button></form>`:'<p class="note" style="text-align:center">Sign in to buy a plan.</p>'}`;
+  if(me)$('#pf').onsubmit=e=>{e.preventDefault();paidReq()};
  }else if(view.v==='wish'){
   A.innerHTML=`${tb('Wishlist',1)}<div class="don" style="margin-top:0"><b>Keep KLYRO alive 💜</b><span>KLYRO is free for everyone. Your support pays for servers and new features.</span><div class="acts" style="justify-content:flex-start"><button class="btn" data-act="don">Donate</button></div></div><h2>App upgrades</h2><form id="wf" style="grid-template-columns:1fr auto"><input type="text" id="wt" maxlength="140" placeholder="Suggest an upgrade…" required><button class="btn" type="submit">Add</button></form><div style="margin-top:12px">${wishes.map(w=>`<div class="rw"><div class="rt"><b style="white-space:normal">${esc(w.text)}</b><small>${esc(w.name||'')}</small></div><button class="pb vt ${me&&(w.votes||[]).includes(me.uid)?'on':''}" data-act="vote|${w.id}" aria-label="Vote">${ic('up')}${(w.votes||[]).length}</button></div>`).join('')||'<div class="empty">No ideas yet. Add the first one.</div>'}</div>`;
   $('#wf').onsubmit=addWish;
@@ -237,18 +278,18 @@ function render(){const A=$('#app');
   const a=all().find(x=>x.id===view.id);if(!a)return go('home');
   const L=Object.entries(a.soc||{}).filter(([k,u])=>/^https?:\/\//i.test(u));
   A.innerHTML=`${tb('Album',1)}<div class="ah"><div class="cov" style="${bg(a)}">${a.cover?'':ini(a.title)}</div><h1>${esc(a.title)}</h1>
-  <div class="ar"><div class="av" style="${a.photo?`background-image:url(${a.photo})`:''}">${a.photo?'':ini(a.artist)}</div>${esc(a.artist)} • ${ns(a)}</div>
+  <div class="ar"><div class="av" style="${a.photo?`background-image:url(${a.photo})`:''}">${a.photo?'':ini(a.artist)}</div>${esc(a.artist)}${vb(a.uid)} • ${ns(a)}</div>
   ${a.bio?`<p class="note" style="max-width:360px;margin:0 auto">${esc(a.bio)}</p>`:''}
   ${L.length?`<div class="soc">${L.map(([k,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(k[0].toUpperCase()+k.slice(1))}</a>`).join('')}</div>`:''}
   <div class="acts"><button class="btn" data-act="pl|${a.id}|0">${ic('play')} Play album</button><button class="btn g" data-act="sha|${a.id}">${ic('share')} Share</button>${own(a)?`<button class="btn g" data-act="add|${a.id}">+ Add songs</button><button class="btn g" data-act="del|${a.id}">Delete</button>`:''}</div></div>
-  <div style="margin-top:14px">${a.tracks.map((t,i)=>{const on=QA&&QA.id===a.id&&qi===i;return `<div class="rw ${on?'on':''}" role="button" tabindex="0" data-act="pl|${a.id}|${i}"><div class="th sm">${on?ic('play'):i+1}</div><div class="rt"><b>${esc(t.title)}</b><small>${esc(t.desc||a.artist)}</small></div>${own(a)?`<button class="pb" data-act="ren|${a.id}|${i}" aria-label="Edit song">${ic('edit')}</button><button class="pb" data-act="rm|${a.id}|${i}" aria-label="Remove song">${ic('trash')}</button>`:''}<button class="pb ${liked.includes(t.id)?'on':''}" data-act="like|${t.id}" aria-label="Like">${ic('heart')}</button></div>`}).join('')}</div>`;
+  <div style="margin-top:14px">${a.tracks.map((t,i)=>{const on=QA&&QA.id===a.id&&qi===i;return `<div class="rw ${on?'on':''}" role="button" tabindex="0" data-act="pl|${a.id}|${i}"><div class="th sm">${on?ic('play'):i+1}</div><div class="rt"><b>${esc(t.title)}</b><small>${own(a)&&isPrem(me.uid)?'▶ '+((stt[t.id]||{}).plays||0)+' plays · ':''}${esc(t.desc||a.artist)}</small></div>${own(a)?`<button class="pb" data-act="ren|${a.id}|${i}" aria-label="Edit song">${ic('edit')}</button><button class="pb" data-act="rm|${a.id}|${i}" aria-label="Remove song">${ic('trash')}</button>`:''}<button class="pb ${liked.includes(t.id)?'on':''}" data-act="like|${t.id}" aria-label="Like">${ic('heart')}</button></div>`}).join('')}</div>`;
  }else{
   A.innerHTML=`${tb('Create album',1)}<form id="f"><div class="box"><label>Album title<input type="text" id="at" required maxlength="60" placeholder="Midnight Tapes"></label><label>Artist name<input type="text" id="an" required maxlength="40" placeholder="Your name" value="${esc(me?pname():'')}"></label></div>
   <label>Bio <em>optional</em><textarea id="ab" rows="2" maxlength="200" placeholder="One line about you or this album"></textarea></label>
   <label>Album cover <em>optional</em><input type="file" id="ac" accept="image/*"></label><label>Artist photo <em>optional</em><input type="file" id="ap" accept="image/*"></label>
   <div class="box"><b>Social links <em class="note">optional</em></b><input type="url" id="s1" placeholder="Instagram URL" value="${esc(prSoc('instagram'))}"><input type="url" id="s2" placeholder="YouTube URL" value="${esc(prSoc('youtube'))}"><input type="url" id="s3" placeholder="Spotify URL" value="${esc(prSoc('spotify'))}"><input type="url" id="s4" placeholder="TikTok URL" value="${esc(prSoc('tiktok'))}"></div>
   <label>Songs<input type="file" id="as" accept="audio/*" multiple required><span class="note">Pick one or more audio files. Song titles come from file names.</span></label><div id="tds" style="display:grid;gap:12px"></div>
-  <button class="btn" type="submit" id="sub">Publish album</button><p class="note">Your album goes live for everyone. Only you can add songs to it or delete it.</p></form>`;
+  <button class="btn" type="submit" id="sub">Publish album</button><p class="note">${me&&isPrem(me.uid)?'':'Free plan: 1 album and 10 songs. '}Your album goes live for everyone. Only you can add songs to it or delete it.</p></form>`;
   $('#f').onsubmit=pub;
   $('#as').onchange=e=>{$('#tds').innerHTML=[...e.target.files].map(f=>`<label>About “${esc(f.name.replace(/\.[^.]+$/,''))}” <em>optional</em><textarea class="td" rows="2" maxlength="300" placeholder="Describe this song"></textarea></label>`).join('')};
  }}
@@ -262,26 +303,39 @@ async function pubOld(e){e.preventDefault();const b=$('#sub');b.disabled=true;b.
 const CLD={cloud:'hjs27iwz',preset:'klryo_uploads'};
 function cup(file,onp){return new Promise((ok,no)=>{const x=new XMLHttpRequest(),f=new FormData();f.append('file',file);f.append('upload_preset',CLD.preset);x.open('POST',`https://api.cloudinary.com/v1_1/${CLD.cloud}/auto/upload`);x.upload.onprogress=e=>{if(e.lengthComputable&&onp)onp(e.loaded/e.total)};x.onload=()=>{try{const r=JSON.parse(x.responseText);r.secure_url?ok(r.secure_url):no(new Error((r.error&&r.error.message||'upload failed')+' ['+CLD.cloud+' / '+CLD.preset+']'))}catch(er){no(er)}};x.onerror=()=>no(new Error('network error'));x.send(f)})}
 async function upl(files,btn){const out=[];for(let i=0;i<files.length;i++){const url=await cup(files[i],p=>{if(btn)btn.textContent='Uploading '+(i+1)+'/'+files.length+' · '+Math.round(p*100)+'%'});out.push({id:'t'+Date.now()+Math.random().toString(36).slice(2,7),title:files[i].name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' '),url})}return out}
-async function pub(e){e.preventDefault();if(!me){$('#login').hidden=false;return}const b=$('#sub');b.disabled=true;
+async function pub(e){e.preventDefault();if(!me){$('#login').hidden=false;return}if(!limitOK(true,[...$('#as').files].length)){toast('Free plan limit reached. Upgrade to Artist Premium');go('prem');return}const b=$('#sub');b.disabled=true;
  try{const files=[...$('#as').files],id='a'+Date.now()+Math.random().toString(36).slice(2,6),tracks=await upl(files,b);tracks.forEach((t,i)=>{const d=document.querySelectorAll('.td')[i];t.desc=d?d.value.trim():''});b.textContent='Saving…';
   const a={id,uid:me.uid,title:$('#at').value.trim(),artist:$('#an').value.trim(),bio:$('#ab').value.trim(),g:Math.floor(Math.random()*6),cover:await img($('#ac').files[0],420),photo:await img($('#ap').files[0],120),soc:{instagram:$('#s1').value.trim(),youtube:$('#s2').value.trim(),spotify:$('#s3').value.trim(),tiktok:$('#s4').value.trim()},tracks,ts:Date.now()};
   await window.klyroSave(a);toast('Published for everyone');go('alb',id)
  }catch(err){toast('Failed: '+(err.message||'try again'));b.disabled=false;b.textContent='Publish album'}}
 async function saveProf(e){e.preventDefault();if(!me)return;const b=$('#ssv');b.disabled=true;
  const p={uid:me.uid,name:$('#sn').value.trim()||me.displayName||'',soc:{instagram:$('#t1').value.trim(),youtube:$('#t2').value.trim(),spotify:$('#t3').value.trim(),tiktok:$('#t4').value.trim()}};
- try{await window.klyroProfile(p);prof=p;toast('Profile saved');go('prof')}catch(er){toast('Could not save. Check Firestore rules.');b.disabled=false}}
-function donate(){closeDr();const u='upi://pay?pa='+UPI_ID+'&pn=KLYRO&tn='+encodeURIComponent('Keep KLYRO alive')+'&cu=INR';let left=false;const h=()=>{if(document.hidden)left=true};document.addEventListener('visibilitychange',h);location.href=u;
+ try{await window.klyroProfile(p);prof={...(prof||{}),...p};toast('Profile saved');go('prof')}catch(er){toast('Could not save. Check Firestore rules.');b.disabled=false}}
+function upiPay(am,tn){const u='upi://pay?pa='+UPI_ID+'&pn=KLYRO&tn='+encodeURIComponent(tn)+(am?'&am='+am:'')+'&cu=INR';let left=false;const h=()=>{if(document.hidden)left=true};document.addEventListener('visibilitychange',h);location.href=u;
  setTimeout(()=>{document.removeEventListener('visibilitychange',h);if(!left){try{navigator.clipboard.writeText(UPI_ID)}catch(e){}toast('No UPI app found. UPI ID copied: '+UPI_ID)}},1800)}
+function donate(){closeDr();upiPay(0,'Keep KLYRO alive')}
+const untilMs=p=>{const u=p&&p.until;if(!u)return 0;if(u.toMillis)return u.toMillis();if(typeof u==='number')return u;const d=Date.parse(u);return isNaN(d)?0:d};
+const isPrem=uid=>{const p=prem[uid];return !!(p&&p.artist&&(!p.until||untilMs(p)>Date.now()))};
+const planOf=uid=>isPrem(uid)?(prem[uid].plan||'month'):'';
+const pr=uid=>planOf(uid)==='year'?1:0;
+const vb=uid=>isPrem(uid)&&prem[uid].verified?'<span class="vf'+(planOf(uid)==='year'?' gold':'')+'" title="Verified">✔</span>':'';
+function limitOK(newAlbum,n){if(isPrem(me.uid))return true;const mine=albums.filter(own),songs=mine.reduce((t,a)=>t+a.tracks.length,0);return !(newAlbum&&mine.length>=FREE.albums)&&songs+n<=FREE.songs}
+async function paidReq(){const tx=$('#tx').value.trim();if(!tx||!me)return;try{await window.klyroReq({uid:me.uid,name:pname(),email:me.email||'',tx,plan:$('#pl').value,price:priceOf($('#pl').value),ts:Date.now()});toast('Request sent. Premium turns on after we verify the payment')}catch(e){toast('Could not send request')}}
+function pinList(){const p=prof||{};return p.pins||(p.pin?[p.pin]:[])}
+function pinHtml(){if(!me||!isPrem(me.uid))return'';const out=pinList().map(x=>{const a=albums.find(y=>y.id===x.aid);if(!a)return'';const i=a.tracks.findIndex(t=>t.id===x.tid);if(i<0)return'';const t=a.tracks[i];
+ return `<div class="rw" role="button" tabindex="0" data-act="pl|${a.id}|${i}"><div class="th" style="${bg(a)}">${a.cover?'':ini(a.title)}</div><div class="rt"><b>${esc(t.title)}</b><small>${esc(a.title)}</small></div><span class="pb">${ic('play')}</span></div>`}).join('');return out?`<h2>📌 Pinned songs</h2>${out}`:''}
+function profAnal(mine){const T=mine.flatMap(a=>a.tracks.map(t=>({t,p:(stt[t.id]||{}).plays||0,o:(stt[t.id]||{}).opens||0}))),tp=T.reduce((n,x)=>n+x.p,0),to=T.reduce((n,x)=>n+x.o,0),pm=isPrem(me.uid);
+ return `<h2>Analytics</h2><div class="box"><div style="display:flex;justify-content:space-between"><span>Total plays</span><b>${tp}</b></div>${pm?`<div style="display:flex;justify-content:space-between"><span>Share link opens</span><b>${to}</b></div><b>Top songs</b>${T.slice().sort((x,y)=>y.p-x.p).slice(0,5).map(x=>`<div style="display:flex;justify-content:space-between"><span>${esc(x.t.title)}</span><b>▶ ${x.p}</b></div>`).join('')||'<span class="note">No songs yet.</span>'}`:`<p class="note">Upgrade to Artist Premium for per-song plays and share link opens.</p><button class="btn g" data-act="nav|prem">See Premium</button>`}</div>`}
 const donH=()=>`<div class="don"><b>Keep KLYRO alive 💜</b><span>KLYRO is free. Help pay for servers and new features.</span><div class="acts" style="justify-content:flex-start"><button class="btn" data-act="don">Donate</button><button class="btn g" data-act="nav|wish">Wishlist</button></div></div>`;
 async function addWish(e){e.preventDefault();if(!me){$('#login').hidden=false;toast('Sign in to add ideas');return}const t=$('#wt').value.trim();if(!t)return;
  try{await window.klyroWish({id:'w'+Date.now()+Math.random().toString(36).slice(2,6),uid:me.uid,name:pname(),text:t,votes:[me.uid],ts:Date.now()});$('#wt').value='';toast('Idea added')}catch(er){toast('Could not add. Check Firestore rules.')}}
 const BASE=location.origin+location.pathname;
 const shareLink=(aid,tid)=>BASE+'?a='+encodeURIComponent(aid)+(tid?'&s='+encodeURIComponent(tid):'');
 async function shareIt(url,title){try{if(navigator.share){await navigator.share({title,text:title+' on KLYRO',url});return}}catch(e){if(e&&e.name==='AbortError')return}try{await navigator.clipboard.writeText(url);toast('Link copied')}catch(e){prompt('Copy this link',url)}}
-function openDr(){const p=pname();$('#drp').innerHTML=`<button class="dh" data-act="dnav|prof"><div class="av" style="${me.photoURL?`background-image:url(${esc(me.photoURL)})`:''}">${me.photoURL?'':ini(p)}</div><div><b>${esc(p)}</b><small>View profile</small></div></button><button class="di" data-act="dmine">${ic('lib')}Your albums</button><button class="di" data-act="dliked">${ic('heart')}Liked songs</button><button class="di" data-act="dnav|set">${ic('gear')}Settings and privacy</button><button class="di" data-act="dnav|wish">${ic('star')}Wishlist</button><button class="di" data-act="don">${ic('heart')}Keep KLYRO alive</button><button class="di" data-act="so">${ic('out')}Sign out</button>`;$('#dr').classList.add('o')}
+function openDr(){const p=pname();$('#drp').innerHTML=`<button class="dh" data-act="dnav|prof"><div class="av" style="${me.photoURL?`background-image:url(${esc(me.photoURL)})`:''}">${me.photoURL?'':ini(p)}</div><div><b>${esc(p)}</b><small>View profile</small></div></button><button class="di" data-act="dmine">${ic('lib')}Your albums</button><button class="di" data-act="dliked">${ic('heart')}Liked songs</button><button class="di" data-act="dnav|set">${ic('gear')}Settings and privacy</button><button class="di" data-act="dnav|prem">${ic('bolt')}Artist Premium</button><button class="di" data-act="dnav|wish">${ic('star')}Wishlist</button><button class="di" data-act="don">${ic('heart')}Keep KLYRO alive</button><button class="di" data-act="so">${ic('out')}Sign out</button>`;$('#dr').classList.add('o')}
 const closeDr=()=>$('#dr').classList.remove('o');
-async function renSong(aid,i){const a=albums.find(x=>x.id===aid);if(!a||!own(a))return;const t=a.tracks[i];if(!t)return;const n=prompt('Song name',t.title);if(n===null)return;const v=n.trim().slice(0,80)||t.title;const d0=prompt('Song description (optional)',t.desc||'');if(d0===null)return;const d=d0.trim().slice(0,300);if(v===t.title&&d===(t.desc||''))return;
- try{await window.klyroTracks(aid,a.tracks.map((x,j)=>j===i?{...x,title:v,desc:d}:x));toast('Song updated')}catch(e){toast('Update failed')}}
+async function renSong(aid,i){const a=albums.find(x=>x.id===aid);if(!a||!own(a))return;const t=a.tracks[i];if(!t)return;const n=prompt('Song name',t.title);if(n===null)return;const v=n.trim().slice(0,80)||t.title;const d0=prompt('Song description (optional)',t.desc||'');if(d0===null)return;const d=d0.trim().slice(0,300);const pin=isPrem(me.uid)&&!pinList().some(x=>x.tid===t.id)&&confirm('Pin this song to the top of your profile?');if(v===t.title&&d===(t.desc||'')&&!pin)return;
+ try{if(v!==t.title||d!==(t.desc||''))await window.klyroTracks(aid,a.tracks.map((x,j)=>j===i?{...x,title:v,desc:d}:x));if(pin){const mx=planOf(me.uid)==='year'?3:1,ps=pinList().concat([{aid,tid:t.id}]);while(ps.length>mx)ps.shift();await window.klyroPin(me.uid,ps)}toast('Song updated')}catch(e){toast('Update failed')}}
 async function rmSong(aid,i){const a=albums.find(x=>x.id===aid);if(!a||!own(a))return;const t=a.tracks[i];if(!t)return;
  if(a.tracks.length<2){toast('An album needs at least one song. Delete the album instead.');return}
  if(!confirm('Remove “'+t.title+'” from this album?'))return;
@@ -289,13 +343,13 @@ async function rmSong(aid,i){const a=albums.find(x=>x.id===aid);if(!a||!own(a))r
  try{await window.klyroTracks(aid,a.tracks.filter((x,j)=>j!==i));liked=liked.filter(l=>l!==t.id);save();if(was){au.pause();$('#mini').hidden=true;$('#np').classList.remove('o');QA=null;Q=[];qi=-1}toast('Song removed')}catch(e){toast('Remove failed')}}
 function delAlb(id){if(!confirm('Delete this album?'))return;const a=albums.find(x=>x.id===id);if(!a||!own(a))return;a.tracks.forEach(x=>{liked=liked.filter(l=>l!==x.id)});save();window.klyroDel(id);if(QA&&QA.id===id){au.pause();$('#mini').hidden=true;$('#np').classList.remove('o')}go('home')}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t)return;const [k,a,b]=t.dataset.act.split('|');
- const M={open:()=>go('alb',a),nav:()=>go(a),pl:()=>play(a,+b),np:()=>$('#np').classList.add('o'),npx:()=>$('#np').classList.remove('o'),tog:()=>au.paused?au.play():au.pause(),nx:()=>step(1),pv:()=>au.currentTime>3?au.currentTime=0:step(-1),sh:()=>{shuf=!shuf;t.classList.toggle('on',shuf)},rp:()=>{rep=!rep;t.classList.toggle('on',rep)},like:()=>lk(a==='cur'?(Q[qi]||{}).id:a),flt:()=>{flt=a;render()},lf:()=>{view.f=a;render()},liked:()=>{go('lib');view.f='liked';render()},back:()=>go(view.from||'home'),del:()=>delAlb(a),ren:()=>renSong(a,+b),rm:()=>rmSong(a,+b),don:donate,shs:()=>{const t=Q[qi];if(t&&QA)shareIt(shareLink(QA.id,t.id),t.title+' · '+QA.artist)},sha:()=>{const al=all().find(x=>x.id===a);if(al)shareIt(shareLink(a),al.title+' · '+al.artist)},vote:()=>{if(!me){$('#login').hidden=false;return}const w=wishes.find(x=>x.id===a);if(w&&!(w.votes||[]).includes(me.uid))window.klyroVote(a,me.uid).catch(()=>toast('Vote failed'))},menu:()=>{if(!me){$('#login').hidden=false;return}openDr()},drx:closeDr,dnav:()=>{closeDr();go(a)},dmine:()=>{closeDr();go('lib');view.f='mine';render()},dliked:()=>{closeDr();go('lib');view.f='liked';render()},so:()=>{if(confirm('Sign out of KLYRO?')){closeDr();window.klyroSignOut()}},add:()=>{const al=albums.find(x=>x.id===a);if(al&&own(al)){addTarget=a;$('#addf').click()}},out:()=>{if(me&&confirm('Sign out of KLYRO?'))window.klyroSignOut()}};
+ const M={open:()=>go('alb',a),nav:()=>go(a),pl:()=>play(a,+b),np:()=>$('#np').classList.add('o'),npx:()=>$('#np').classList.remove('o'),tog:()=>au.paused?au.play():au.pause(),nx:()=>step(1),pv:()=>au.currentTime>3?au.currentTime=0:step(-1),sh:()=>{shuf=!shuf;t.classList.toggle('on',shuf)},rp:()=>{rep=!rep;t.classList.toggle('on',rep)},like:()=>lk(a==='cur'?(Q[qi]||{}).id:a),flt:()=>{flt=a;render()},lf:()=>{view.f=a;render()},liked:()=>{go('lib');view.f='liked';render()},back:()=>go(view.from||'home'),del:()=>delAlb(a),ren:()=>renSong(a,+b),rm:()=>rmSong(a,+b),don:donate,buy:()=>{const p=PLANS[a];if(!p)return;if(!me){$('#login').hidden=false;toast('Sign in to get Premium');return}lastPlan=a;upiPay(priceOf(a),'KLYRO '+p.name+' '+me.uid.slice(0,10))},shs:()=>{const t=Q[qi];if(t&&QA)shareIt(shareLink(QA.id,t.id),t.title+' · '+QA.artist)},sha:()=>{const al=all().find(x=>x.id===a);if(al)shareIt(shareLink(a),al.title+' · '+al.artist)},vote:()=>{if(!me){$('#login').hidden=false;return}const w=wishes.find(x=>x.id===a);if(w&&!(w.votes||[]).includes(me.uid))window.klyroVote(a,me.uid).catch(()=>toast('Vote failed'))},menu:()=>{if(!me){$('#login').hidden=false;return}openDr()},drx:closeDr,dnav:()=>{closeDr();go(a)},dmine:()=>{closeDr();go('lib');view.f='mine';render()},dliked:()=>{closeDr();go('lib');view.f='liked';render()},so:()=>{if(confirm('Sign out of KLYRO?')){closeDr();window.klyroSignOut()}},add:()=>{const al=albums.find(x=>x.id===a);if(al&&own(al)){addTarget=a;$('#addf').click()}},out:()=>{if(me&&confirm('Sign out of KLYRO?'))window.klyroSignOut()}};
  if(M[k])M[k]()});
 $('#addf').onchange=async e=>{const a=albums.find(x=>x.id===addTarget),files=[...e.target.files];e.target.value='';if(!a||!own(a)||!files.length)return;toast('Adding songs…');
  try{for(const f of files){const tid=a.id+'t'+Date.now()+Math.random().toString(36).slice(2,6);await idbPut(tid,f);a.tracks.push({id:tid,title:f.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ')})}
   if(!a.uid&&me)a.uid=me.uid;save();toast(files.length+(files.length>1?' songs added':' song added'));render()}catch(err){toast('Could not add songs. Try smaller files.')}};
 $('#addf').onchange=async e=>{const a=albums.find(x=>x.id===addTarget),files=[...e.target.files];e.target.value='';if(!a||!own(a)||!files.length)return;
- try{toast('Uploading…');const nt=await upl(files);await window.klyroAdd(a.id,nt);toast(files.length>1?'Songs added for everyone':'Song added for everyone')}catch(err){toast('Failed: '+(err.message||'try again'))}};
+ if(!limitOK(false,files.length)){toast('Free plan limit: 10 songs. Upgrade to Artist Premium');go('prem');return}try{toast('Uploading…');const nt=await upl(files);await window.klyroAdd(a.id,nt);toast(files.length>1?'Songs added for everyone':'Song added for everyone')}catch(err){toast('Failed: '+(err.message||'try again'))}};
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('[role=button]'))e.target.click()});
 go('home');
 </script>
@@ -303,7 +357,7 @@ go('home');
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 const app=initializeApp({apiKey:"AIzaSyDVL2VpwiSonZHh3XoP1Jff_52ZZ5qbUaA",authDomain:"klyro-by-spidyyy.firebaseapp.com",projectId:"klyro-by-spidyyy",storageBucket:"klyro-by-spidyyy.firebasestorage.app",messagingSenderId:"705702340670",appId:"1:705702340670:web:adff6488e3b5da51e1096f"});
-import {getFirestore,collection,doc,setDoc,updateDoc,deleteDoc,onSnapshot,arrayUnion} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import {getFirestore,collection,doc,setDoc,updateDoc,deleteDoc,onSnapshot,arrayUnion,increment} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 const auth=getAuth(app),db=getFirestore(app);
 window.klyroSave=a=>setDoc(doc(db,'albums',a.id),a);
 window.klyroAdd=(id,t)=>updateDoc(doc(db,'albums',id),{tracks:arrayUnion(...t)});
@@ -314,7 +368,12 @@ window.klyroSignIn=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvid
 window.klyroSignOut=()=>signOut(auth);
 let unp=null;
 onAuthStateChanged(auth,u=>{window.onUser(u);if(unp){unp();unp=null}if(u)unp=onSnapshot(doc(db,'users',u.uid),d=>window.onProfile(d.exists()?d.data():null),()=>{})});
-window.klyroProfile=p=>setDoc(doc(db,'users',p.uid),p);
+window.klyroProfile=p=>setDoc(doc(db,'users',p.uid),p,{merge:true});
+window.klyroPin=(uid,p)=>setDoc(doc(db,'users',uid),{pins:p},{merge:true});
+window.klyroReq=r=>setDoc(doc(db,'premium_requests',r.uid),r);
+window.klyroStat=(aid,tid,k)=>setDoc(doc(db,'stats',tid),{aid,[k]:increment(1)},{merge:true}).catch(()=>{});
+onSnapshot(collection(db,'premium'),sn=>{const m={};sn.docs.forEach(d=>m[d.id]=d.data());window.onPrem(m)},()=>{});
+onSnapshot(collection(db,'stats'),sn=>{const m={};sn.docs.forEach(d=>m[d.id]=d.data());window.onStats(m)},()=>{});
 window.klyroWish=w=>setDoc(doc(db,'wishes',w.id),w);
 window.klyroVote=(id,uid)=>updateDoc(doc(db,'wishes',id),{votes:arrayUnion(uid)});
 onSnapshot(collection(db,'wishes'),sn=>window.onWishes(sn.docs.map(d=>d.data()).sort((a,b)=>(b.votes||[]).length-(a.votes||[]).length||(b.ts||0)-(a.ts||0))),()=>{});
